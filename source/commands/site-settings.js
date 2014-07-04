@@ -1,17 +1,17 @@
-/*! 
+/*!
  *  commands/site-settings.js
  */
 var CP = CP || {};
 
-(function () {
-    var util = CP.Util,
-        strings = {
+(function (util) {
+    var strings = {
             siteSettings: 'Site Settings',
             lookAndFeel: 'Look and Feel',
             siteCollectionAdmin: 'Site Collection Admin',
             siteAdmin: 'Site Administration',
             usersAndPermissions: 'Users and Permissions',
-            webDesignerGalleries: 'Web Designer Galleries'            
+            webDesignerGalleries: 'Web Designer Galleries',
+            layouts: '/_layouts/15/'
         };
 
     CP.CommandList = CP.CommandList || [];
@@ -20,37 +20,37 @@ var CP = CP || {};
         {
             command: strings.siteSettings + ': ' + strings.usersAndPermissions + ': People and groups',
             fn: function () {
-                util.goToPage('/_layouts/15/people.aspx');
+                util.goToPage(strings.layouts + 'people.aspx');
             }
         },
         {
             command: strings.siteSettings + ': ' + strings.usersAndPermissions + ': Site permissions',
             fn: function () {
-                util.goToPage('/_layouts/15/user.aspx');
+                util.goToPage(strings.layouts + 'user.aspx');
             }
         },
         {
             command: strings.siteSettings + ': ' + strings.usersAndPermissions + ': Site collection administrators',
             fn: function () {
-                util.goToPage('/_layouts/15/mngsiteadmin.aspx');
+                util.goToPage(strings.layouts + 'mngsiteadmin.aspx');
             }
         },
         {
             command: strings.siteSettings + ': ' + strings.usersAndPermissions + ': Site app permissions',
             fn: function () {
-                util.goToPage('/_layouts/15/appprincipals.aspx?Scope=Web');
+                util.goToPage(strings.layouts + 'appprincipals.aspx?Scope=Web');
             }
         },
         {
             command: strings.siteSettings + ': ' + strings.webDesignerGalleries + ': Site columns',
             fn: function () {
-                util.goToPage('/_layouts/15/mngfield.aspx');
+                util.goToPage(strings.layouts + 'mngfield.aspx');
             }
         },
         {
             command: strings.siteSettings + ': ' + strings.webDesignerGalleries + ': Site content types',
             fn: function () {
-                util.goToPage('/_layouts/15/mngctype.aspx');
+                util.goToPage(strings.layouts + 'mngctype.aspx');
             }
         },
         {
@@ -92,85 +92,85 @@ var CP = CP || {};
         {
             command: strings.siteSettings + ': ' + strings.siteAdmin + ': Regional settings',
             fn: function () {
-                util.goToPage('/_layouts/15/regionalsetng.aspx');
+                util.goToPage(strings.layouts + 'regionalsetng.aspx');
             }
         },
         {
             command: strings.siteSettings + ': ' + strings.siteAdmin + ': Language settings',
             fn: function () {
-                util.goToPage('/_layouts/15/muisetng.aspx');
+                util.goToPage(strings.layouts + 'muisetng.aspx');
             }
         },
         {
             command: strings.siteSettings + ': ' + strings.siteAdmin + ': Site libraries and lists',
             fn: function () {
-                util.goToPage('/_layouts/15/mcontent.aspx');
+                util.goToPage(strings.layouts + 'mcontent.aspx');
             }
         },
         {
             command: strings.siteSettings + ': ' + strings.siteAdmin + ': User alerts',
             fn: function () {
-                util.goToPage('/_layouts/15/sitesubs.aspx');
+                util.goToPage(strings.layouts + 'sitesubs.aspx');
             }
         },
         {
             command: strings.siteSettings + ': ' + strings.siteAdmin + ': RSS',
             fn: function () {
-                util.goToPage('/_layouts/15/siterss.aspx');
+                util.goToPage(strings.layouts + 'siterss.aspx');
             }
         },
         {
             command: strings.siteSettings + ': ' + strings.siteAdmin + ': Sites and workspaces',
             fn: function () {
-                util.goToPage('/_layouts/15/mngsubwebs.aspx');
+                util.goToPage(strings.layouts + 'mngsubwebs.aspx');
             }
         },
         {
             command: strings.siteSettings + ': ' + strings.siteAdmin + ': Workflow settings',
             fn: function () {
-                util.goToPage('/_layouts/15/wrksetng.aspx');
+                util.goToPage(strings.layouts + 'wrksetng.aspx');
             }
         },
         {
             command: strings.siteSettings + ': ' + strings.siteAdmin + ': Site Closure and Deletion',
             fn: function () {
-                util.goToPage('/_layouts/15/ProjectPolicyAndLifecycle.asp');
+                util.goToPage(strings.layouts + 'ProjectPolicyAndLifecycle.asp');
             }
         },
         {
             command: strings.siteSettings + ': ' + strings.siteAdmin + ': Popularity Trends',
             fn: function () {
-                util.goToPage('/_layouts/15/Reporting.aspx');
+                util.goToPage(strings.layouts + 'Reporting.aspx');
             }
         },
         {
             command: strings.siteSettings + ': ' + strings.siteAdmin + ': Term store management',
             fn: function () {
-                util.goToPage('/_layouts/15/termstoremanager.aspx');
+                util.goToPage(strings.layouts + 'termstoremanager.aspx');
             }
         },
         {
             command: strings.siteSettings + ': Search: Result Sources',
             fn: function () {
-                util.goToPage('/_layouts/15/manageresultsources.aspx');
+                util.goToPage(strings.layouts + 'manageresultsources.aspx');
             }
         },
         {
             command: strings.siteSettings + ': Search: Result Types',
             fn: function () {
-                util.goToPage('/_layouts/15/manageresulttypes.aspx');
+                util.goToPage(strings.layouts + 'manageresulttypes.aspx');
             }
         },
         {
             command: strings.siteSettings + ': Search: Query Rules',
             fn: function () {
-                util.goToPage('/_layouts/15/listqueryrules.aspx');
+                util.goToPage(strings.layouts + 'listqueryrules.aspx');
             }
         },
         {
             command: strings.siteSettings + ': Search: Schema',
             fn: function () {
-                util.goToPage('/_layouts/15/listmanagedproperties.aspx');
+                util.goToPage(strings.layouts + 'listmanagedproperties.aspx');
             }
         },
         {
@@ -182,145 +182,145 @@ var CP = CP || {};
         {
             command: strings.siteSettings + ': Search: Searchable columns',
             fn: function () {
-                util.goToPage('/_layouts/15/NoCrawlSettings.aspx');
+                util.goToPage(strings.layouts + 'NoCrawlSettings.aspx');
             }
         },
         {
             command: strings.siteSettings + ': Search: Search and offline availability',
             fn: function () {
-                util.goToPage('/_layouts/15/srchvis.aspx');
+                util.goToPage(strings.layouts + 'srchvis.aspx');
             }
         },
         {
             command: strings.siteSettings + ': Search: Configuration Import',
             fn: function () {
-                util.goToPage('/_layouts/15/importsearchconfiguration.aspx');
+                util.goToPage(strings.layouts + 'importsearchconfiguration.aspx');
             }
         },
         {
             command: strings.siteSettings + ': Search: Configuration Import',
             fn: function () {
-                util.goToPage('/_layouts/15/importsearchconfiguration.aspx');
+                util.goToPage(strings.layouts + 'importsearchconfiguration.aspx');
             }
         },
         {
             command: strings.siteSettings + ': Search: Configuration Export',
             fn: function () {
-                util.goToPage('/_layouts/15/exportsearchconfiguration.aspx');
+                util.goToPage(strings.layouts + 'exportsearchconfiguration.aspx');
             }
         },
         {
             command: strings.siteSettings + ': ' + strings.lookAndFeel + ': Design Manager',
             fn: function () {
-                util.goToPage('/_layouts/15/RedirectPage.aspx?Target={SiteCollectionUrl}{LayoutsFolder}DesignSite.aspx');
+                util.goToPage(strings.layouts + 'RedirectPage.aspx?Target={SiteCollectionUrl}{LayoutsFolder}DesignSite.aspx');
             }
         },
         {
             command: strings.siteSettings + ': ' + strings.lookAndFeel + ': Master page',
             fn: function () {
-                util.goToPage('/_layouts/15/ChangeSiteMasterPage.aspx');
+                util.goToPage(strings.layouts + 'ChangeSiteMasterPage.aspx');
             }
         },
         {
             command: strings.siteSettings + ': ' + strings.lookAndFeel + ': Title, description, and logo',
             fn: function () {
-                util.goToPage('/_layouts/15/prjsetng.aspx');
+                util.goToPage(strings.layouts + 'prjsetng.aspx');
             }
         },
         {
             command: strings.siteSettings + ': ' + strings.lookAndFeel + ': Page layouts and site templates',
             fn: function () {
-                util.goToPage('/_layouts/15/AreaTemplateSettings.aspx');
+                util.goToPage(strings.layouts + 'AreaTemplateSettings.aspx');
             }
         },
         {
             command: strings.siteSettings + ': ' + strings.lookAndFeel + ': Welcome Page',
             fn: function () {
-                util.goToPage('/_layouts/15/AreaWelcomePage.aspx');
+                util.goToPage(strings.layouts + 'AreaWelcomePage.aspx');
             }
         },
         {
             command: strings.siteSettings + ': ' + strings.lookAndFeel + ': Device Channels',
             fn: function () {
-                util.goToPage('/_layouts/15/RedirectPage.aspx?Target={SiteCollectionUrl}DeviceChannels');
+                util.goToPage(strings.layouts + 'RedirectPage.aspx?Target={SiteCollectionUrl}DeviceChannels');
             }
         },
         {
             command: strings.siteSettings + ': ' + strings.lookAndFeel + ': Tree view',
             fn: function () {
-                util.goToPage('/_layouts/15/navoptions.aspx');
+                util.goToPage(strings.layouts + 'navoptions.aspx');
             }
         },
         {
             command: strings.siteSettings + ': ' + strings.lookAndFeel + ': Change the look',
             fn: function () {
-                util.goToPage('/_layouts/15/designgallery.aspx');
+                util.goToPage(strings.layouts + 'designgallery.aspx');
             }
         },
         {
             command: strings.siteSettings + ': ' + strings.lookAndFeel + ': Import Design Package',
             fn: function () {
-                util.goToPage('/_layouts/15/DesignPackageInstall.aspx');
+                util.goToPage(strings.layouts + 'DesignPackageInstall.aspx');
             }
         },
         {
             command: strings.siteSettings + ': ' + strings.lookAndFeel + ': Navigation',
             fn: function () {
-                util.goToPage('/_layouts/15/AreaNavigationSettings.aspx');
+                util.goToPage(strings.layouts + 'AreaNavigationSettings.aspx');
             }
         },
         {
             command: strings.siteSettings + ': ' + strings.lookAndFeel + ': Image Renditions',
             fn: function () {
-                util.goToPage('/_layouts/15/ImageRenditionSettings.aspx');
+                util.goToPage(strings.layouts + 'ImageRenditionSettings.aspx');
             }
         },
         {
             command: strings.siteSettings + ': Site Actions: Manage site features',
             fn: function () {
-                util.goToPage('/_layouts/15/ManageFeatures.aspx');
+                util.goToPage(strings.layouts + 'ManageFeatures.aspx');
             }
         },
         {
             command: strings.siteSettings + ': Site Actions: Reset to site definition',
             fn: function () {
-                util.goToPage('/_layouts/15/reghost.aspx');
+                util.goToPage(strings.layouts + 'reghost.aspx');
             }
         },
         {
             command: strings.siteSettings + ': Site Actions: Delete this site',
             fn: function () {
-                util.goToPage('/_layouts/15/deleteweb.aspx');
+                util.goToPage(strings.layouts + 'deleteweb.aspx');
             }
         },
         {
             command: strings.siteSettings + ': ' + strings.siteCollectionAdmin + ': Recycle bin',
             fn: function () {
-                util.goToPage('/_layouts/15/AdminRecycleBin.aspx');
+                util.goToPage(strings.layouts + 'AdminRecycleBin.aspx');
             }
         },
         {
             command: strings.siteSettings + ': ' + strings.siteCollectionAdmin + ': Search Result Sources',
             fn: function () {
-                util.goToPage('/_layouts/15/manageresultsources.aspx?level=sitecol');
+                util.goToPage(strings.layouts + 'manageresultsources.aspx?level=sitecol');
             }
         },
         {
             command: strings.siteSettings + ': ' + strings.siteCollectionAdmin + ': Search Result Types',
             fn: function () {
-                util.goToPage('/_layouts/15/manageresulttypes.aspx?level=sitecol');
+                util.goToPage(strings.layouts + 'manageresulttypes.aspx?level=sitecol');
             }
         },
         {
             command: strings.siteSettings + ': ' + strings.siteCollectionAdmin + ': Search Query Rules',
             fn: function () {
-                util.goToPage('/_layouts/15/listqueryrules.aspx?level=sitecol');
+                util.goToPage(strings.layouts + 'listqueryrules.aspx?level=sitecol');
             }
         },
         {
             command: strings.siteSettings + ': ' + strings.siteCollectionAdmin + ': Search Schema',
             fn: function () {
-                util.goToPage('/_layouts/15/listmanagedproperties.aspx?level=sitecol');
+                util.goToPage(strings.layouts + 'listmanagedproperties.aspx?level=sitecol');
             }
         },
         {
@@ -332,115 +332,115 @@ var CP = CP || {};
         {
             command: strings.siteSettings + ': ' + strings.siteCollectionAdmin + ': Search Configuration Import',
             fn: function () {
-                util.goToPage('/_layouts/15/importsearchconfiguration.aspx?level=sitecol');
+                util.goToPage(strings.layouts + 'importsearchconfiguration.aspx?level=sitecol');
             }
         },
         {
             command: strings.siteSettings + ': ' + strings.siteCollectionAdmin + ': Search Configuration Export',
             fn: function () {
-                util.goToPage('/_layouts/15/exportsearchconfiguration.aspx?level=sitecol');
+                util.goToPage(strings.layouts + 'exportsearchconfiguration.aspx?level=sitecol');
             }
         },
         {
             command: strings.siteSettings + ': ' + strings.siteCollectionAdmin + ': Site collection features',
             fn: function () {
-                util.goToPage('/_layouts/15/ManageFeatures.aspx?Scope=Site');
+                util.goToPage(strings.layouts + 'ManageFeatures.aspx?Scope=Site');
             }
         },
         {
             command: strings.siteSettings + ': ' + strings.siteCollectionAdmin + ': Site hierarchy',
             fn: function () {
-                util.goToPage('/_layouts/15/vsubwebs.aspx');
+                util.goToPage(strings.layouts + 'vsubwebs.aspx');
             }
         },
         {
             command: strings.siteSettings + ': ' + strings.siteCollectionAdmin + ': Search engine optimization settings',
             fn: function () {
-                util.goToPage('/_layouts/15/SEOSettings.aspx');
+                util.goToPage(strings.layouts + 'SEOSettings.aspx');
             }
         },
         {
             command: strings.siteSettings + ': ' + strings.siteCollectionAdmin + ': Site collection navigation',
             fn: function () {
-                util.goToPage('/_layouts/15/SiteNavigationSettings.aspx');
+                util.goToPage(strings.layouts + 'SiteNavigationSettings.aspx');
             }
         },
         {
             command: strings.siteSettings + ': ' + strings.siteCollectionAdmin + ': Site collection audit settings',
             fn: function () {
-                util.goToPage('/_layouts/15/AuditSettings.aspx');
+                util.goToPage(strings.layouts + 'AuditSettings.aspx');
             }
         },
         {
             command: strings.siteSettings + ': ' + strings.siteCollectionAdmin + ': Audit log reports',
             fn: function () {
-                util.goToPage('/_layouts/15/Reporting.aspx?Category=Auditing');
+                util.goToPage(strings.layouts + 'Reporting.aspx?Category=Auditing');
             }
         },
         {
             command: strings.siteSettings + ': ' + strings.siteCollectionAdmin + ': Portal site connection',
             fn: function () {
-                util.goToPage('/_layouts/15/portal.aspx');
+                util.goToPage(strings.layouts + 'portal.aspx');
             }
         },
         {
             command: strings.siteSettings + ': ' + strings.siteCollectionAdmin + ': Content Type Policy Templates',
             fn: function () {
-                util.goToPage('/_layouts/15/Policylist.aspx');
+                util.goToPage(strings.layouts + 'Policylist.aspx');
             }
         },
         {
             command: strings.siteSettings + ': ' + strings.siteCollectionAdmin + ': Storage Metrics',
             fn: function () {
-                util.goToPage('/_layouts/15/storman.aspx');
+                util.goToPage(strings.layouts + 'storman.aspx');
             }
         },
         {
             command: strings.siteSettings + ': ' + strings.siteCollectionAdmin + ': Site collection app permissions',
             fn: function () {
-                util.goToPage('/_layouts/15/appprincipals.aspx');
+                util.goToPage(strings.layouts + 'appprincipals.aspx');
             }
         },
         {
             command: strings.siteSettings + ': ' + strings.siteCollectionAdmin + ': Content type publishing',
             fn: function () {
-                util.goToPage('/_layouts/15/contenttypesyndicationhubs.aspx');
+                util.goToPage(strings.layouts + 'contenttypesyndicationhubs.aspx');
             }
         },
         {
             command: strings.siteSettings + ': ' + strings.siteCollectionAdmin + ': Site collection output cache',
             fn: function () {
-                util.goToPage('/_layouts/15/sitecachesettings.aspx');
+                util.goToPage(strings.layouts + 'sitecachesettings.aspx');
             }
         },
         {
             command: strings.siteSettings + ': ' + strings.siteCollectionAdmin + ': Popularity and Search Reports',
             fn: function () {
-                util.goToPage('/_layouts/15/Reporting.aspx?Category=AnalyticsSiteCollection');
+                util.goToPage(strings.layouts + 'Reporting.aspx?Category=AnalyticsSiteCollection');
             }
         },
         {
             command: strings.siteSettings + ': ' + strings.siteCollectionAdmin + ': Variations Settings',
             fn: function () {
-                util.goToPage('/_layouts/15/VariationSettings.aspx');
+                util.goToPage(strings.layouts + 'VariationSettings.aspx');
             }
         },
         {
             command: strings.siteSettings + ': ' + strings.siteCollectionAdmin + ': Variation labels',
             fn: function () {
-                util.goToPage('/_layouts/15/VariationLabels.aspx');
+                util.goToPage(strings.layouts + 'VariationLabels.aspx');
             }
         },
         {
             command: strings.siteSettings + ': ' + strings.siteCollectionAdmin + ': Translatable columns',
             fn: function () {
-                util.goToPage('/_layouts/15/SiteTranslatableColumns.aspx');
+                util.goToPage(strings.layouts + 'SiteTranslatableColumns.aspx');
             }
         },
         {
             command: strings.siteSettings + ': ' + strings.siteCollectionAdmin + ': Variation logs',
             fn: function () {
-                util.goToPage('/_layouts/15/VariationLogs.aspx');
+                util.goToPage(strings.layouts + 'VariationLogs.aspx');
             }
         },
         {
@@ -452,27 +452,27 @@ var CP = CP || {};
         {
             command: strings.siteSettings + ': ' + strings.siteCollectionAdmin + ': HTML Field Security',
             fn: function () {
-                util.goToPage('/_layouts/15/HtmlFieldSecurity.aspx');
+                util.goToPage(strings.layouts + 'HtmlFieldSecurity.aspx');
             }
         },
         {
             command: strings.siteSettings + ': ' + strings.siteCollectionAdmin + ': SharePoint Designer Settings',
             fn: function () {
-                util.goToPage('/_layouts/15/SharePointDesignerSettings.aspx');
+                util.goToPage(strings.layouts + 'SharePointDesignerSettings.aspx');
             }
         },
         {
             command: strings.siteSettings + ': ' + strings.siteCollectionAdmin + ': Site collection health checks',
             fn: function () {
-                util.goToPage('/_layouts/15/sitehealthcheck.aspx');
+                util.goToPage(strings.layouts + 'sitehealthcheck.aspx');
             }
         },
         {
             command: strings.siteSettings + ': ' + strings.siteCollectionAdmin + ': Site collection upgrade',
             fn: function () {
-                util.goToPage('/_layouts/15/siteupgrade.aspx');
+                util.goToPage(strings.layouts + 'siteupgrade.aspx');
             }
         }
     ]);
 
-})();
+})(CP.Util);

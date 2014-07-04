@@ -67,7 +67,7 @@ module.exports = function(grunt) {
                         cwd: '<%= dirs.source %>',
                         src: [
                             '**/*.js',
-                            '!**/*.min.js'
+                            '!vendor/**/*.js'
                         ],
                         dest: '<%= dirs.tmp %>/',
                         ext: '.min.js'

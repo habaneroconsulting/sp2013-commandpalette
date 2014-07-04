@@ -3,9 +3,7 @@
  */
 var CP = CP || {};
 
-(function () {
-    var util = CP.Util;
-
+(function (util) {
     CP.CommandList = CP.CommandList || [];
 
     CP.CommandList = CP.CommandList.concat([
@@ -35,4 +33,4 @@ var CP = CP || {};
         }
     ]);
 
-})();
+})(CP.Util);
