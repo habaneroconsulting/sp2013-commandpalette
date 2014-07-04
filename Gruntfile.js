@@ -19,6 +19,7 @@ module.exports = function(grunt) {
         dirs: {
             build: 'build',
             source: 'source',
+            tmp: '.tmp',
             vendor: '<%= dirs.source %>/vendor'
         },
 
@@ -60,16 +61,36 @@ module.exports = function(grunt) {
 
         uglify: {
             plugin: {
+                files: [
+                    {
+                        expand: true,
+                        cwd: '<%= dirs.source %>',
+                        src: [
+                            '**/*.js',
+                            '!**/*.min.js'
+                        ],
+                        dest: '<%= dirs.tmp %>/',
+                        ext: '.min.js'
+                    }
+                ],
+                options: {
+                    preserveComments: 'some'
+                }
+            }
+        },
+
+        concat: {
+            source: {
                 files: {
                     '<%= dirs.build %>/sp2013-commandpalette.min.js': [
                         '<%= dirs.vendor %>/**/*.js',
-                        '<%= dirs.source %>/commands/*.js',
-                        '<%= dirs.source %>/command-util.js',
-                        '<%= dirs.source %>/command-palette.js'
-                    ]
+                        '<%= dirs.tmp %>/command-util.min.js',
+                        '<%= dirs.tmp %>/commands/*.js',
+                        '<%= dirs.tmp %>/command-palette.min.js'
+                    ]                    
                 },
                 options: {
-                    preserveComments: 'some'
+                    banner: '/* sp2013-commandpalette.min.js - Habanero Consulting Group */\r\n\r\n'
                 }
             }
         },
