@@ -1,6 +1,6 @@
 {
-  "name": "sp-commandpalette",
-  "description": "Implements a command palette for faster access of SharePoint commands.",
+  "name": "sp2013-commandpalette",
+  "description": "A command palette for faster access of frequent SharePoint actions.",
   "version": "0.1.0",
   "author": "Habanero Consulting Group",
   "contributors": [
@@ -12,7 +12,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/habaneroconsulting/sp-commandpalette.git"
+    "url": "https://github.com/habaneroconsulting/sp2013-commandpalette.git"
   },
   "devDependencies": {
     "grunt": "~0.4.5",
