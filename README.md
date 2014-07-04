@@ -2,6 +2,8 @@
 
 ## How It Works
 
+![Command Palette Screenshot](http://i.imgur.com/FolLxHQ.png)
+
 ## Getting Started
 
 ### Installing it in your SharePoint 2013 solution
