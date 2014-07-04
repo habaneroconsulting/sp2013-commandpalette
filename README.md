@@ -14,7 +14,7 @@
 
 ## Support
 
-If you have a bug, or a feature request, please post in the [issue tracker](https://github.com/habaneroconsulting/sp-sortablewebparts/issues).
+If you have a bug, or a feature request, please post in the [issue tracker](https://github.com/habaneroconsulting/sp2013-commandpalette/issues).
 
 Otherwise, you can contact the author over Twitter at [@cwlparsons](https://twitter.com/cwlparsons).
 
