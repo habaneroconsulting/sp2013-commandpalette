@@ -86,6 +86,7 @@ var CP = CP || {};
                     <ul class="sp-commandpalette-command-list" data-bind="foreach: filteredCommands"> \
                         <li class="sp-commandpalette-command" data-bind="click: $parent.runFunction, css: { \'sp-commandpalette-command--selected\': $parent.selected() == $index() }, text: command"></li> \
                     </ul> \
+                    <p data-bind="visible: filteredCommands().length == 0">No results</p> \
                 </div> \
             ';
 
@@ -125,6 +126,12 @@ var CP = CP || {};
     height: 40px; \
     margin: 5px; \
     width: 490px; \
+} \
+\
+.sp-commandpalette p { \
+    color: #e6e6e6; \
+    margin: 10px; \
+    margin-top: 5px; \
 } \
 \
 .sp-commandpalette-command-list { \

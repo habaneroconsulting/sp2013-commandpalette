@@ -123,7 +123,7 @@ module.exports = function(grunt) {
     ]);
 
     grunt.registerTask('build', [
-        'jshint', 'uglify'
+        'jshint', 'uglify', 'concat'
     ]);
 
     grunt.registerTask('serve', [
