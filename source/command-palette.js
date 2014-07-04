@@ -19,7 +19,7 @@ var CP = CP || {};
     function CommandPaletteModel() {
         var palette = this;
 
-        CP.CommandList.sort(function (a, b) {
+        CP.CommandList.sort(function(a, b) {
             if (a.command < b.command) {
                 return -1;
             }
@@ -34,20 +34,20 @@ var CP = CP || {};
         palette.command  = ko.observable('');
         palette.selected = ko.observable(0);
 
-        palette.filteredCommands = ko.computed(function () {
+        palette.filteredCommands = ko.computed(function() {
             var filter = palette.command().toLowerCase();
 
             if (!filter) {
                 return CP.CommandList;
             } else {
-                return ko.utils.arrayFilter(CP.CommandList, function (command) {
+                return ko.utils.arrayFilter(CP.CommandList, function(command) {
                     palette.selected(0);
                     return command.command.toLowerCase().indexOf(filter) > -1;
                 });
             }
         });
 
-        palette.moveDown = function () {
+        palette.moveDown = function() {
             if (palette.selected() === palette.filteredCommands().length - 1) {
                 palette.selected(0);
 
@@ -59,7 +59,7 @@ var CP = CP || {};
             }
         };
 
-        palette.moveUp = function () {
+        palette.moveUp = function() {
             if (palette.selected() === 0) {
                 palette.selected(palette.filteredCommands().length - 1);
 
@@ -71,7 +71,7 @@ var CP = CP || {};
             }
         };
 
-        palette.runFunction = function () {
+        palette.runFunction = function() {
             var index = palette.selected();
             palette.filteredCommands()[index].fn();
             hideInput();
@@ -188,39 +188,25 @@ var CP = CP || {};
         }
     }
 
+    function visibleHotkeyHanlder(key, callback) {
+        Mousetrap.bind(key, function(e) {
+            if (isInputVisible()) {
+                e.preventDefault();
+                callback();
+            }
+        });
+    }
+
     function hotkeyHandler() {
-        Mousetrap.bind('ctrl+shift+l', function (e) {
+        Mousetrap.bind('ctrl+shift+l', function(e) {
             e.preventDefault();
             showInput();
         });
 
-        Mousetrap.bind('esc', function (e) {
-            if (isInputVisible()) {
-                e.preventDefault();
-                hideInput();
-            }
-        });
-
-        Mousetrap.bind('up', function (e) {
-            if (isInputVisible()) {
-                e.preventDefault();
-                model.moveUp();
-            }
-        });
-
-        Mousetrap.bind('down', function (e) {
-            if (isInputVisible()) {
-                e.preventDefault();
-                model.moveDown();                
-            }
-        });
-
-        Mousetrap.bind('enter', function (e) {
-            if (isInputVisible()) {
-                e.preventDefault();
-                model.runFunction();
-            }
-        });
+        visibleHotkeyHanlder('esc', hideInput);
+        visibleHotkeyHanlder('up', model.moveUp);
+        visibleHotkeyHanlder('down', model.moveDown);
+        visibleHotkeyHanlder('enter', model.runFunction);
     }
 
     function initialise() {
