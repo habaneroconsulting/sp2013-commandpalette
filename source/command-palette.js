@@ -19,6 +19,18 @@ var CP = CP || {};
     function CommandPaletteModel() {
         var palette = this;
 
+        CP.CommandList.sort(function (a, b) {
+            if (a.command < b.command) {
+                return -1;
+            }
+            
+            if (a.command > b.command) {
+                return 1;
+            }
+            
+            return 0;
+        });
+
         palette.command  = ko.observable('');
         palette.selected = ko.observable(0);
 

@@ -1,6 +1,7 @@
 bower_components
 node_modules
 build
+source/vendor
 .tmp
 *.sublime-project
 *.sublime-workspace

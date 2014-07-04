@@ -34,7 +34,8 @@ module.exports = function(grunt) {
 
         jshint: {
             source: [ 
-                '<%= dirs.source %>/*.js'
+                '<%= dirs.source %>/*.js',
+                '<%= dirs.source %>/commands/*.js'
             ],
             gruntfile: [
                 'Gruntfile.js'
@@ -62,8 +63,8 @@ module.exports = function(grunt) {
                 files: {
                     '<%= dirs.build %>/sp2013-commandpalette.min.js': [
                         '<%= dirs.vendor %>/**/*.js',
+                        '<%= dirs.source %>/commands/*.js',
                         '<%= dirs.source %>/command-util.js',
-                        '<%= dirs.source %>/command-list.js',
                         '<%= dirs.source %>/command-palette.js'
                     ]
                 },

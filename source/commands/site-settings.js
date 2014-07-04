@@ -1,5 +1,5 @@
 /*! 
- *  command-list.js
+ *  commands/site-settings.js
  */
 var CP = CP || {};
 
@@ -7,91 +7,16 @@ var CP = CP || {};
     var util = CP.Util,
         strings = {
             siteSettings: 'Site Settings',
-            lookAndFeel: 'Look & Feel',
+            lookAndFeel: 'Look and Feel',
             siteCollectionAdmin: 'Site Collection Admin',
-            usersAndPermissions: 'Users & Permissions',
+            siteAdmin: 'Site Administration',
+            usersAndPermissions: 'Users and Permissions',
             webDesignerGalleries: 'Web Designer Galleries'            
         };
 
-    CP.CommandList = [
-        {
-            command: 'Central Administration',
-            fn: function () {
-                window.open(window.location.origin + ':11111');
-            }
-        },
-        {
-            command: 'Log in as a different user',
-            fn: function () {
-                function forceNewLogin() {
-                    window.location.href = CP.Util.getWebServerRelativeUrl() + '_layouts/closeConnection.aspx?loginasanotheruser=true';
-                }
+    CP.CommandList = CP.CommandList || [];
 
-                if (_spPageContextInfo) {
-                    forceNewLogin();
-                }
-            }
-        },
-        {
-            command: 'View all site content',
-            fn: function () {
-                window.open(window.location.origin + '/' + _spPageContextInfo.webServerRelativeUrl + '/_layouts/viewlsts.aspx');
-            }
-        },
-        {
-            command: 'Manage service applications',
-            fn: function () {
-                window.open(window.location.origin + ':11111/_admin/ServiceApplications.aspx');
-            }
-        },
-        {
-            command: 'Web part maintance page',
-            fn: function () {
-                window.location = window.location + '?contents=1';
-            }
-        },
-        {
-            command: 'Dialog version',
-            fn: function () {
-                window.location = window.location + '?isDlg=1';
-            }
-        },
-        {
-            command: strings.siteSettings + '',
-            fn: function () {
-                util.goToPage('/_layouts/15/settings.aspx');
-            }
-        },
-        {
-            command: 'Edit page',
-            fn: function () {
-                SuiteOnClick("javascript:SP.SOD.executeFunc('sp.ui.pub.ribbon.js', 'Pub.Ribbon.PubCommands', function() {Pub.Ribbon.PubCommands.notifyProgress(SP.Publishing.Resources.notificationMessageLoading);if (document.forms['aspnetForm']['MSOLayout_InDesignMode'] != null) document.forms['aspnetForm']['MSOLayout_InDesignMode'].value = 1;if (document.forms['aspnetForm']['MSOAuthoringConsole_FormContext'] != null) document.forms['aspnetForm']['MSOAuthoringConsole_FormContext'].value = 1;if (document.forms['aspnetForm']['MSOSPWebPartManager_DisplayModeName'] != null) document.forms['aspnetForm']['MSOSPWebPartManager_DisplayModeName'].value = 'Design';__doPostBack('ctl05','edit')});");
-            }
-        },
-        {
-            command: 'Edit properties',
-            fn: function () {
-                EnsureScriptParams('ribbon', 'ChangeWikiPageMode', true);
-            }
-        },
-        {
-            command: 'Add a page',
-            fn: function () {
-                OpenCreateWebPageDialog('/_layouts/15/createwebpage.aspx');
-            }
-        },
-        {
-            command: 'Add an app',
-            fn: function () {
-                util.goToPage('/_layouts/15/addanapp.aspx');
-            }
-        },
-        {
-            command: 'Site contents',
-            fn: function () {
-                util.goToPage('/_layouts/15/viewlsts.aspx');
-            }
-        },
+    CP.CommandList = CP.CommandList.concat([
         {
             command: strings.siteSettings + ': ' + strings.usersAndPermissions + ': People and groups',
             fn: function () {
@@ -165,61 +90,61 @@ var CP = CP || {};
             }
         },
         {
-            command: strings.siteSettings + ': Site Administration: Regional settings',
+            command: strings.siteSettings + ': ' + strings.siteAdmin + ': Regional settings',
             fn: function () {
                 util.goToPage('/_layouts/15/regionalsetng.aspx');
             }
         },
         {
-            command: strings.siteSettings + ': Site Administration: Language settings',
+            command: strings.siteSettings + ': ' + strings.siteAdmin + ': Language settings',
             fn: function () {
                 util.goToPage('/_layouts/15/muisetng.aspx');
             }
         },
         {
-            command: strings.siteSettings + ': Site Administration: Site libraries and lists',
+            command: strings.siteSettings + ': ' + strings.siteAdmin + ': Site libraries and lists',
             fn: function () {
                 util.goToPage('/_layouts/15/mcontent.aspx');
             }
         },
         {
-            command: strings.siteSettings + ': Site Administration: User alerts',
+            command: strings.siteSettings + ': ' + strings.siteAdmin + ': User alerts',
             fn: function () {
                 util.goToPage('/_layouts/15/sitesubs.aspx');
             }
         },
         {
-            command: strings.siteSettings + ': Site Administration: RSS',
+            command: strings.siteSettings + ': ' + strings.siteAdmin + ': RSS',
             fn: function () {
                 util.goToPage('/_layouts/15/siterss.aspx');
             }
         },
         {
-            command: strings.siteSettings + ': Site Administration: Sites and workspaces',
+            command: strings.siteSettings + ': ' + strings.siteAdmin + ': Sites and workspaces',
             fn: function () {
                 util.goToPage('/_layouts/15/mngsubwebs.aspx');
             }
         },
         {
-            command: strings.siteSettings + ': Site Administration: Workflow settings',
+            command: strings.siteSettings + ': ' + strings.siteAdmin + ': Workflow settings',
             fn: function () {
                 util.goToPage('/_layouts/15/wrksetng.aspx');
             }
         },
         {
-            command: strings.siteSettings + ': Site Administration: Site Closure and Deletion',
+            command: strings.siteSettings + ': ' + strings.siteAdmin + ': Site Closure and Deletion',
             fn: function () {
                 util.goToPage('/_layouts/15/ProjectPolicyAndLifecycle.asp');
             }
         },
         {
-            command: strings.siteSettings + ': Site Administration: Popularity Trends',
+            command: strings.siteSettings + ': ' + strings.siteAdmin + ': Popularity Trends',
             fn: function () {
                 util.goToPage('/_layouts/15/Reporting.aspx');
             }
         },
         {
-            command: strings.siteSettings + ': Site Administration: Term store management',
+            command: strings.siteSettings + ': ' + strings.siteAdmin + ': Term store management',
             fn: function () {
                 util.goToPage('/_layouts/15/termstoremanager.aspx');
             }
@@ -548,6 +473,6 @@ var CP = CP || {};
                 util.goToPage('/_layouts/15/siteupgrade.aspx');
             }
         }
-    ];
+    ]);
 
 })();
