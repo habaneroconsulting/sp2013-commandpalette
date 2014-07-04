@@ -5,14 +5,12 @@
  */
 
 module.exports = function(grunt) {
-
+    'use strict';
+    
     /**
      * Load required Grunt tasks.
      */
-    grunt.loadNpmTasks('grunt-contrib-clean');
-    grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-contrib-watch');
+    require('load-grunt-tasks')(grunt);
 
     /**
      * Task configuration
@@ -62,15 +60,25 @@ module.exports = function(grunt) {
         uglify: {
             plugin: {
                 files: {
-                    '<%= dirs.build %>/<%= files.main %>': [
-                        '<%= dirs.vendor %>/*',
-                        '<%= dirs.source %>/commands.js',
-                        '<%= dirs.source %>/commandpalette.js'
+                    '<%= dirs.build %>/sp2013-commandpalette.min.js': [
+                        '<%= dirs.vendor %>/**/*.js',
+                        '<%= dirs.source %>/command-util.js',
+                        '<%= dirs.source %>/command-list.js',
+                        '<%= dirs.source %>/command-palette.js'
                     ]
                 },
                 options: {
                     preserveComments: 'some'
                 }
+            }
+        },
+
+        shell: {
+            bower: {
+                options: {
+                    stdout: true
+                },
+                command: 'bower-installer'
             }
         },
 
@@ -88,8 +96,16 @@ module.exports = function(grunt) {
     /**
      * Register tasks
      */
+    grunt.registerTask('bower', [
+        'shell'
+    ]);
+
     grunt.registerTask('build', [
         'jshint', 'uglify'
+    ]);
+
+    grunt.registerTask('serve', [
+        'build', 'watch'
     ]);
 
     grunt.registerTask('default', [
