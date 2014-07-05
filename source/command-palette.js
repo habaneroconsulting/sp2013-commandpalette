@@ -13,6 +13,7 @@ var CP = CP || {};
         elements = {
             workspace: document.getElementById('s4-workspace')
         },
+        isInitialised = false,
         model = new CommandPaletteModel();
 
     /**
@@ -237,11 +238,6 @@ var CP = CP || {};
 
     // Add the event handlers to hot keys
     function hotkeyHandler() {
-        Mousetrap.bind('ctrl+shift+l', function(e) {
-            e.preventDefault();
-            showInput();
-        });
-
         visibleHotkeyHanlder('esc', hideInput);
         visibleHotkeyHanlder('up', model.moveUp);
         visibleHotkeyHanlder('down', model.moveDown);
@@ -250,10 +246,21 @@ var CP = CP || {};
 
     // Initialise the code
     function initialise() {
+        isInitialised = true;
+
         appendStyles();
         createCommandPalette();
         hotkeyHandler();
     }
 
-    initialise();
+    // Bind the initialisation code to our hotkey
+    Mousetrap.bind(['ctrl+shift+l', 'command+shift+l'], function(e) {
+        e.preventDefault();
+
+        if (!isInitialised) {
+            initialise();
+        }
+
+        showInput();
+    });
 })(CP.Util);
