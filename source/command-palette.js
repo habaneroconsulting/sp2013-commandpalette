@@ -3,15 +3,15 @@
  */
 var CP = CP || {};
 
-(function() {
+(function(util) {
     'use strict';
 
-    var elements = {
-            workspace: document.getElementById('s4-workspace')
-        },
-        constants = {
+    var constants = {
             commandHeight: 30,
             indexOfMiddleCommand: 5,
+        },
+        elements = {
+            workspace: document.getElementById('s4-workspace')
         },
         model = new CommandPaletteModel();
 
@@ -19,20 +19,8 @@ var CP = CP || {};
      * CommandPaletteModel for Knockout
      */
     function CommandPaletteModel() {
-        var palette = this;
-
-        // Sort through the commands alphabetically
-        CP.CommandList.sort(function(a, b) {
-            if (a.command < b.command) {
-                return -1;
-            }
-            
-            if (a.command > b.command) {
-                return 1;
-            }
-            
-            return 0;
-        });
+        var palette = this,
+            list = getCommandList();
 
         palette.command  = ko.observable('');
         palette.selected = ko.observable(0);
@@ -43,11 +31,11 @@ var CP = CP || {};
 
             // If there is no word, show all commands
             if (!filter) {
-                return CP.CommandList;
+                return list;
             }
             // Filter the results
             else {
-                return ko.utils.arrayFilter(CP.CommandList, function(command) {
+                return ko.utils.arrayFilter(list, function(command) {
                     // After each re-filter, select the first result
                     palette.selected(0);
                     return command.command.toLowerCase().indexOf(filter) > -1;
@@ -117,6 +105,36 @@ var CP = CP || {};
 
             hideInput();
         }
+    }
+
+    // Get the command list and sort/exclude
+    function getCommandList() {
+        var list = CP.CommandList,
+            type = util.getSiteType();
+
+        // Remove command if excluded
+        list = list.filter(function(item) {
+            if (item.exclude && item.exclude.indexOf(type) > -1) {
+                return 0;
+            }
+
+            return 1;
+        });
+
+        // Sort through the commands alphabetically
+        list.sort(function(a, b) {
+            if (a.command < b.command) {
+                return -1;
+            }
+            
+            if (a.command > b.command) {
+                return 1;
+            }
+            
+            return 0;
+        });
+
+        return list;
     }
 
     // Append the CSS styles to the page
@@ -238,4 +256,4 @@ var CP = CP || {};
     }
 
     initialise();
-})();
+})(CP.Util);

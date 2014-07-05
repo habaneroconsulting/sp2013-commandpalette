@@ -84,6 +84,7 @@ module.exports = function(grunt) {
                 files: {
                     '<%= dirs.build %>/sp2013-commandpalette.min.js': [
                         '<%= dirs.vendor %>/**/*.js',
+                        '<%= dirs.tmp %>/command-constants.min.js',
                         '<%= dirs.tmp %>/command-util.min.js',
                         '<%= dirs.tmp %>/commands/*.js',
                         '<%= dirs.tmp %>/command-palette.min.js'
