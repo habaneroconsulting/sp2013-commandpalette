@@ -2,7 +2,7 @@
  *  command-util.js
  */
 var CP = CP || {};
-CP.Util = {};
+CP.Util = CP.Util || {};
 
 (function(module) {
 

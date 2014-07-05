@@ -241,11 +241,22 @@ var CP = CP || {};
     }
 
     // Add the event handlers to hot keys
-    function hotkeyHandler() {
+    function eventHandlers() {
         visibleHotkeyHanlder('esc', hideInput);
         visibleHotkeyHanlder('up', model.moveUp);
         visibleHotkeyHanlder('down', model.moveDown);
         visibleHotkeyHanlder('enter', model.runFunction);
+
+        // If the user clicks outside the palette, hide the pallete
+        window.onclick = function (e) {
+            hideInput();
+        };
+
+        // If the user clicks within the palette, prevent the event
+        // from bubbling up to the window
+        elements.commandPalette.onclick = function (e) {
+            e.stopPropagation();
+        };
     }
 
     // Initialise the code
@@ -254,7 +265,7 @@ var CP = CP || {};
 
         appendStyles();
         createCommandPalette();
-        hotkeyHandler();
+        eventHandlers();
     }
 
     // Bind the initialisation code to our hotkey
