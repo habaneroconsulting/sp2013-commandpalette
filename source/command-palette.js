@@ -36,10 +36,10 @@ var CP = CP || {};
             }
             // Filter the results
             else {
-                return ko.utils.arrayFilter(list, function(command) {
+                return ko.utils.arrayFilter(list, function(item) {
                     // After each re-filter, select the first result
                     palette.selected(0);
-                    return command.command.toLowerCase().indexOf(filter) > -1;
+                    return item.command.toLowerCase().indexOf(filter) > -1;
                 });
             }
         });
@@ -111,12 +111,16 @@ var CP = CP || {};
     // Get the command list and sort/exclude
     function getCommandList() {
         var list = CP.CommandList,
-            type = util.getSiteType();
+            type = util.getSiteType(),
+            version = util.getVersionType();
 
         // Remove command if excluded
         list = list.filter(function(item) {
-            if (item.exclude && item.exclude.indexOf(type) > -1) {
-                return 0;
+            if (item.exclude) {
+                if (item.exclude.indexOf(type) > -1 ||
+                    item.exclude.indexOf(version) > -1) {
+                    return 0;
+                }
             }
 
             return 1;
@@ -144,59 +148,59 @@ var CP = CP || {};
 
         var style = document.createElement('style');
             style.innerHTML = " \
-.sp-commandpalette { \
-    background: #41454e; \
-    box-shadow: 0 0 30px 0 rgba(0,0,0,0.47); \
-    margin-left: -250px; \
-    position: absolute; \
-    top: 100px; \
-    left: 50%; \
-    width: 500px; \
-} \
-\
-.sp-commandpalette input { \
-    background: #e6e6e6; \
-    box-sizing: border-box; \
-    font-size: 24px; \
-    height: 40px; \
-    margin: 5px; \
-    width: 490px; \
-} \
-\
-.sp-commandpalette p { \
-    color: #e6e6e6; \
-    margin: 10px; \
-    margin-top: 5px; \
-} \
-\
-.sp-commandpalette-command-list { \
-    list-style: none; \
-    margin: 0px 5px 5px; \
-    max-height: 330px; \
-    overflow-y: auto; \
-    padding: 0; \
-} \
-\
-.sp-commandpalette-command { \
-    color: #e6e6e6; \
-    cursor: pointer; \
-    padding: 5px; \
-    height: 20px; \
-    overflow: hidden; \
-    text-overflow: ellipsis; \
-    white-space: nowrap; \
-} \
-\
-.sp-commandpalette-command:hover { \
-    background: #205b8a; \
-    color: #fff; \
-} \
-\
-.sp-commandpalette-command--selected { \
-    background: #0072c6; \
-    color: #fff; \
-} \
-        ";
+                .sp-commandpalette { \
+                    background: #41454e; \
+                    box-shadow: 0 0 30px 0 rgba(0,0,0,0.47); \
+                    margin-left: -250px; \
+                    position: absolute; \
+                    top: 100px; \
+                    left: 50%; \
+                    width: 500px; \
+                } \
+                \
+                .sp-commandpalette input { \
+                    background: #e6e6e6; \
+                    box-sizing: border-box; \
+                    font-size: 24px; \
+                    height: 40px; \
+                    margin: 5px; \
+                    width: 490px; \
+                } \
+                \
+                .sp-commandpalette p { \
+                    color: #e6e6e6; \
+                    margin: 10px; \
+                    margin-top: 5px; \
+                } \
+                \
+                .sp-commandpalette-command-list { \
+                    list-style: none; \
+                    margin: 0px 5px 5px; \
+                    max-height: 330px; \
+                    overflow-y: auto; \
+                    padding: 0; \
+                } \
+                \
+                .sp-commandpalette-command { \
+                    color: #e6e6e6; \
+                    cursor: pointer; \
+                    padding: 5px; \
+                    height: 20px; \
+                    overflow: hidden; \
+                    text-overflow: ellipsis; \
+                    white-space: nowrap; \
+                } \
+                \
+                .sp-commandpalette-command:hover { \
+                    background: #205b8a; \
+                    color: #fff; \
+                } \
+                \
+                .sp-commandpalette-command--selected { \
+                    background: #0072c6; \
+                    color: #fff; \
+                } \
+            ";
 
         elements.head.appendChild(style);
     }

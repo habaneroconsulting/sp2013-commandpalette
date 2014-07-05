@@ -22,14 +22,9 @@ CP.Constants = CP.Constants || {};
         pub: 'publishing'
     };
 
-    module.Version = {
-    	online: 'online',
-    	premise: 'premise'
-    };
-
-    module.Role = {
-    	approver: 'approver',
-    	designer: 'designer'
+    module.VersionTypes = {
+        online: 'online',
+        premise: 'premise'
     };
 
 })(CP.Constants);

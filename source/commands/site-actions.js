@@ -4,6 +4,9 @@
 var CP = CP || {};
 
 (function (util) {
+    var siteType = CP.Constants.SiteTypes,
+        versionType = CP.Constants.VersionTypes;
+
     CP.CommandList = CP.CommandList || [];
 
     CP.CommandList = CP.CommandList.concat([
@@ -45,6 +48,7 @@ var CP = CP || {};
         },
         {
             command: 'Office 365 settings',
+            exclude: [versionType.premise],
             fn: function () {
                 GoToPage('https://portal.microsoftonline.com/EditProfile15.aspx');
             }
