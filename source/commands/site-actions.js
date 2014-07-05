@@ -3,9 +3,10 @@
  */
 var CP = CP || {};
 
-(function (util) {
-    var siteType = CP.Constants.SiteTypes,
-        versionType = CP.Constants.VersionTypes;
+(function (constants, util) {
+    var siteType = constants.SiteTypes,
+        strings = constants.strings,
+        versionType = constants.VersionTypes;
 
     CP.CommandList = CP.CommandList || [];
 
@@ -37,13 +38,13 @@ var CP = CP || {};
         {
             command: 'Add an app',
             fn: function () {
-                util.goToPage('/_layouts/15/addanapp.aspx');
+                util.goToPage(strings.layouts + 'addanapp.aspx');
             }
         },
         {
             command: 'Site contents',
             fn: function () {
-                util.goToPage('/_layouts/15/viewlsts.aspx');
+                util.goToPage(strings.layouts + 'viewlsts.aspx');
             }
         },
         {
@@ -55,4 +56,4 @@ var CP = CP || {};
         }
     ]);
 
-})(CP.Util);
+})(CP.Constants, CP.Util);

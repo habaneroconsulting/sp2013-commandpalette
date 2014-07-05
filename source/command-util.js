@@ -16,6 +16,11 @@ CP.Util = CP.Util || {};
         GoToPage(_spPageContextInfo.webServerRelativeUrl + relativePath);
     };
 
+    // Go to a central administration page
+    module.goToCentralAdmin = function(path) {
+        window.location = window.location.origin + ':11111' + path;
+    };
+
     // Returns the site type based on a site template ID
     module.getSiteType = function() {
         var siteType = CP.Constants.SiteTypes;
@@ -29,6 +34,10 @@ CP.Util = CP.Util || {};
                 case 'BLANKINTERNET#0':
                 case 'SRCHCEN#0':
                     return siteType.pub;
+            }
+
+            if (g_wsaSiteTemplateId.indexOf('INTERNET') > -1) {
+                return siteType.pub;
             }
         }
 

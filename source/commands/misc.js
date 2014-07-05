@@ -3,7 +3,7 @@
  */
 var CP = CP || {};
 
-(function (util) {
+(function (constants, util) {    
     CP.CommandList = CP.CommandList || [];
 
     CP.CommandList = CP.CommandList.concat([
@@ -11,12 +11,6 @@ var CP = CP || {};
             command: 'View all site content',
             fn: function () {
                 window.open(window.location.origin + '/' + _spPageContextInfo.webServerRelativeUrl + '/_layouts/viewlsts.aspx');
-            }
-        },
-        {
-            command: 'Manage service applications',
-            fn: function () {
-                window.open(window.location.origin + ':11111/_admin/ServiceApplications.aspx');
             }
         },
         {
@@ -33,4 +27,4 @@ var CP = CP || {};
         }
     ]);
 
-})(CP.Util);
+})(CP.Constants, CP.Util);

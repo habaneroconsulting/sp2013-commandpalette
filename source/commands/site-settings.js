@@ -3,10 +3,10 @@
  */
 var CP = CP || {};
 
-(function (util) {
-    var strings = CP.Constants.Strings,
-        siteType = CP.Constants.SiteTypes;
-
+(function (constants, util) {
+    var strings = constants.Strings,
+        siteType = constants.SiteTypes;
+    
     CP.CommandList = CP.CommandList || [];
 
     CP.CommandList = CP.CommandList.concat([
@@ -555,4 +555,4 @@ var CP = CP || {};
         }
     ]);
 
-})(CP.Util);
+})(CP.Constants, CP.Util);

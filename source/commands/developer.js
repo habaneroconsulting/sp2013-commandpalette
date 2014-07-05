@@ -3,7 +3,7 @@
  */
 var CP = CP || {};
 
-(function (util) {
+(function (constants, util) {    
     CP.CommandList = CP.CommandList || [];
 
     CP.CommandList = CP.CommandList.concat([
@@ -20,7 +20,7 @@ var CP = CP || {};
             }
         },
         {
-            command: 'CBS to Diagnostic',
+            command: 'Developer Tool: CBS to Diagnostic',
             fn: function () {
                 (function () {
                     'use strict';
@@ -50,7 +50,7 @@ var CP = CP || {};
             }
         },
         {
-            command: 'Property bag',
+            command: 'Developer Tool: Property bag',
             fn: function () {
                 window.Hcf = window.Hcf || {};
                 Hcf.PropertyBagBookmarklet = Hcf.PropertyBagBookmarklet || {};
@@ -160,7 +160,7 @@ var CP = CP || {};
             }
         },
         {
-            command: 'REST Endpoints',
+            command: 'Developer Tool: REST Endpoints',
             fn: function () {
                 window.Hcf = window.Hcf || {};
                 Hcf.RestEndpointsBookmarklet = Hcf.RestEndpointsBookmarklet || {};
@@ -367,4 +367,4 @@ var CP = CP || {};
         }
     ]);
 
-})(CP.Util);
+})(CP.Constants, CP.Util);
