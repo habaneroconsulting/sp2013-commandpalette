@@ -44,17 +44,22 @@ var CP = CP || {};
             }
         });
 
+        palette.set = function(index) {
+            palette.selected(index);
+            elements.commandList.scrollTop = (index - constants.indexOfMiddleCommand) * constants.commandHeight;
+        };
+
+        palette.move = function(index) {
+            palette.set(palette.selected() + index);
+        };
+
         // Move down on the list
         palette.moveDown = function() {
             // If the user is already on the bottom most command, go back to the top
             if (palette.selected() === palette.filteredCommands().length - 1) {
-                palette.selected(0);
-
-                elements.commandList.scrollTop = 0;
+                palette.set(0);
             } else {
-                var paletteIndex = palette.selected() + 1;
-                palette.selected(paletteIndex);
-                elements.commandList.scrollTop = (paletteIndex - constants.indexOfMiddleCommand) * constants.commandHeight;
+                palette.move(1);
             }
         };
 
@@ -62,13 +67,33 @@ var CP = CP || {};
         palette.moveUp = function() {
             // If the user is on the top most command, go to the bottom
             if (palette.selected() === 0) {
-                palette.selected(palette.filteredCommands().length - 1);
-
-                elements.commandList.scrollTop = elements.commandList.scrollHeight;
+                palette.set(palette.filteredCommands().length - 1);
             } else {
-                var paletteIndex = palette.selected() - 1;
-                palette.selected(paletteIndex);
-                elements.commandList.scrollTop = (paletteIndex - constants.indexOfMiddleCommand) * constants.commandHeight;
+                palette.move(-1);
+            }
+        };
+
+        // Move down on the list
+        palette.movePageDown = function() {
+            // If the user is already on the bottom most command, go back to the top
+            if (palette.selected() === palette.filteredCommands().length - 1) {
+                palette.set(0);
+            } else if (palette.selected() > palette.filteredCommands().length - 10) {
+                palette.set(palette.filteredCommands().length - 1);
+            } else {
+                palette.move(10);
+            }
+        };
+
+        // Move up on the list
+        palette.movePageUp = function() {
+            // If the user is on the top most command, go to the bottom
+            if (palette.selected() === 0) {
+                palette.set(palette.filteredCommands().length - 1);
+            } else if (palette.selected() < 10) {
+                palette.set(0);
+            } else {
+                palette.move(-10);
             }
         };
 
@@ -131,11 +156,11 @@ var CP = CP || {};
             if (a.command < b.command) {
                 return -1;
             }
-            
+
             if (a.command > b.command) {
                 return 1;
             }
-            
+
             return 0;
         });
 
@@ -245,6 +270,8 @@ var CP = CP || {};
         visibleHotkeyHanlder('esc', hideInput);
         visibleHotkeyHanlder('up', model.moveUp);
         visibleHotkeyHanlder('down', model.moveDown);
+        visibleHotkeyHanlder('pageup', model.movePageUp);
+        visibleHotkeyHanlder('pagedown', model.movePageDown);
         visibleHotkeyHanlder('enter', model.runFunction);
 
         // If the user clicks outside the palette, hide the pallete
