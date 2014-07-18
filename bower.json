@@ -6,13 +6,13 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "knockoutjs": "~3.1.0",
+    "rivets": "~0.6.8",
     "mousetrap": "~1.4.6"
   },
   "install": {
     "path": "source/vendor",
     "sources": {
-      "knockoutjs": "bower_components/knockoutjs/dist/knockout.js",
+      "rivets": "bower_components/rivets/dist/rivets.min.js",
       "mousetrap": "bower_components/mousetrap/mousetrap.min.js"
     }
   }

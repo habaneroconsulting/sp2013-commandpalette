@@ -14,7 +14,8 @@ var CP = CP || {};
             workspace: document.getElementById('s4-workspace')
         },
         isInitialised = false,
-        model = new CommandPaletteModel();
+        commandPaletteModel,
+        view;
 
     /**
      * CommandPaletteModel for Knockout
@@ -23,12 +24,12 @@ var CP = CP || {};
         var palette = this,
             list = getCommandList();
 
-        palette.command  = ko.observable('');
-        palette.selected = ko.observable(0);
+        palette.command  = '';
+        palette.selected = 0;
 
         // Filter commands based on the typed keyword
-        palette.filteredCommands = ko.computed(function() {
-            var filter = palette.command().toLowerCase();
+        palette.filteredCommands = function() {
+            var filter = palette.command.toLowerCase();
 
             // If there is no word, show all commands
             if (!filter) {
@@ -36,13 +37,24 @@ var CP = CP || {};
             }
             // Filter the results
             else {
-                return ko.utils.arrayFilter(list, function(item) {
+                return list.filter(function(item) {
                     // After each re-filter, select the first result
-                    palette.selected(0);
+                    palette.selected = 0;
                     return item.command.toLowerCase().indexOf(filter) > -1;
                 });
             }
-        });
+        };
+
+        palette.set = function(index) {
+            list.map(function(element) { element.selected = false; });
+            palette.selected = index;
+            palette.filteredCommands()[index].selected = true;
+            elements.commandList.scrollTop = (index - constants.indexOfMiddleCommand) * constants.commandHeight;
+        };
+
+        palette.move = function(index) {
+            palette.set(palette.selected + index);
+        };
 
         palette.set = function(index) {
             palette.selected(index);
@@ -56,7 +68,7 @@ var CP = CP || {};
         // Move down on the list
         palette.moveDown = function() {
             // If the user is already on the bottom most command, go back to the top
-            if (palette.selected() === palette.filteredCommands().length - 1) {
+            if (palette.selected === palette.filteredCommands().length - 1) {
                 palette.set(0);
             } else {
                 palette.move(1);
@@ -66,7 +78,7 @@ var CP = CP || {};
         // Move up on the list
         palette.moveUp = function() {
             // If the user is on the top most command, go to the bottom
-            if (palette.selected() === 0) {
+            if (palette.selected === 0) {
                 palette.set(palette.filteredCommands().length - 1);
             } else {
                 palette.move(-1);
@@ -76,9 +88,9 @@ var CP = CP || {};
         // Move down on the list
         palette.movePageDown = function() {
             // If the user is already on the bottom most command, go back to the top
-            if (palette.selected() === palette.filteredCommands().length - 1) {
+            if (palette.selected === palette.filteredCommands().length - 1) {
                 palette.set(0);
-            } else if (palette.selected() > palette.filteredCommands().length - 10) {
+            } else if (palette.selected > palette.filteredCommands().length - 10) {
                 palette.set(palette.filteredCommands().length - 1);
             } else {
                 palette.move(10);
@@ -88,9 +100,9 @@ var CP = CP || {};
         // Move up on the list
         palette.movePageUp = function() {
             // If the user is on the top most command, go to the bottom
-            if (palette.selected() === 0) {
+            if (palette.selected === 0) {
                 palette.set(palette.filteredCommands().length - 1);
-            } else if (palette.selected() < 10) {
+            } else if (palette.selected < 10) {
                 palette.set(0);
             } else {
                 palette.move(-10);
@@ -99,10 +111,28 @@ var CP = CP || {};
 
         // Run the command
         palette.runFunction = function() {
-            var index = palette.selected();
+            var index = palette.selected;
             palette.filteredCommands()[index].fn();
             hideInput();
         };
+    }
+
+    // Create a custom binding for live values
+    function createLiveValueBinding() {
+        var liveValue = Object.create(rivets.binders.value);
+
+        liveValue.bind = function (el) {
+            this.handler = this.handler || this.publish.bind(this);
+            el.addEventListener("keyup", this.handler);
+        };
+
+        liveValue.unbind = function (el) {
+            if (this.handler) {
+                el.removeEventListener("keyup", this.handler);
+            }
+        };
+
+        rivets.binders["live-value"] = liveValue;
     }
 
     // Create the HTML behind the command palette
@@ -110,13 +140,14 @@ var CP = CP || {};
         if (!elements.commandPalette) {
             // HTML to create the palette
             var html = '\
-                <div class="sp-commandpalette"> \
-                    <input type="text" class="mousetrap" data-bind="value: command, valueUpdate: \'input\'"> \
-                    <ul class="sp-commandpalette-command-list" data-bind="foreach: filteredCommands"> \
-                        <li class="sp-commandpalette-command" data-bind="click: $parent.runFunction, css: { \'sp-commandpalette-command--selected\': $parent.selected() == $index() }, text: command"></li> \
-                    </ul> \
-                    <p data-bind="visible: filteredCommands().length == 0">No results</p> \
-                </div> \
+<div class="sp-commandpalette"> \
+    <input type="text" class="mousetrap" rv-live-value="palette.command"> \
+    <ul class="sp-commandpalette-command-list"> \
+        <li rv-each-command="palette.filteredCommands < command"> \
+        <a class="sp-commandpalette-command" rv-class-selected="command.selected" rv-text="command.command"></a> \
+        </li> \
+    </ul> \
+</div> \
             ';
 
             elements.commandPalette = document.createElement('div');
@@ -127,7 +158,11 @@ var CP = CP || {};
 
             elements.commandList = document.querySelectorAll('.sp-commandpalette-command-list')[0];
 
-            ko.applyBindings(model);
+            commandPaletteModel = new CommandPaletteModel();
+
+            view = rivets.bind(document.querySelector('.sp-commandpalette'), {
+                palette: commandPaletteModel
+            });
 
             hideInput();
         }
@@ -173,58 +208,59 @@ var CP = CP || {};
 
         var style = document.createElement('style');
             style.innerHTML = " \
-                .sp-commandpalette { \
-                    background: #41454e; \
-                    box-shadow: 0 0 30px 0 rgba(0,0,0,0.47); \
-                    margin-left: -250px; \
-                    position: absolute; \
-                    top: 100px; \
-                    left: 50%; \
-                    width: 500px; \
-                } \
-                \
-                .sp-commandpalette input { \
-                    background: #e6e6e6; \
-                    box-sizing: border-box; \
-                    font-size: 24px; \
-                    height: 40px; \
-                    margin: 5px; \
-                    width: 490px; \
-                } \
-                \
-                .sp-commandpalette p { \
-                    color: #e6e6e6; \
-                    margin: 10px; \
-                    margin-top: 5px; \
-                } \
-                \
-                .sp-commandpalette-command-list { \
-                    list-style: none; \
-                    margin: 0px 5px 5px; \
-                    max-height: 330px; \
-                    overflow-y: auto; \
-                    padding: 0; \
-                } \
-                \
-                .sp-commandpalette-command { \
-                    color: #e6e6e6; \
-                    cursor: pointer; \
-                    padding: 5px; \
-                    height: 20px; \
-                    overflow: hidden; \
-                    text-overflow: ellipsis; \
-                    white-space: nowrap; \
-                } \
-                \
-                .sp-commandpalette-command:hover { \
-                    background: #205b8a; \
-                    color: #fff; \
-                } \
-                \
-                .sp-commandpalette-command--selected { \
-                    background: #0072c6; \
-                    color: #fff; \
-                } \
+.sp-commandpalette { \
+    background: #41454e; \
+    box-shadow: 0 0 30px 0 rgba(0,0,0,0.47); \
+    margin-left: -250px; \
+    position: absolute; \
+    top: 100px; \
+    left: 50%; \
+    width: 500px; \
+} \
+\
+.sp-commandpalette input { \
+    background: #e6e6e6; \
+    box-sizing: border-box; \
+    font-size: 24px; \
+    height: 40px; \
+    margin: 5px; \
+    width: 490px; \
+} \
+\
+.sp-commandpalette p { \
+    color: #e6e6e6; \
+    margin: 10px; \
+    margin-top: 5px; \
+} \
+\
+.sp-commandpalette-command-list { \
+    list-style: none; \
+    margin: 0px 5px 5px; \
+    max-height: 330px; \
+    overflow-y: auto; \
+    padding: 0; \
+} \
+\
+.sp-commandpalette-command { \
+    color: #e6e6e6; \
+    cursor: pointer; \
+    display: block; \
+    height: 20px; \
+    overflow: hidden; \
+    padding: 5px; \
+    text-overflow: ellipsis; \
+    white-space: nowrap; \
+} \
+\
+.sp-commandpalette-command:hover { \
+    background: #205b8a; \
+    color: #fff; \
+} \
+\
+.selected { \
+    background: #0072c6; \
+    color: #fff; \
+} \
             ";
 
         elements.head.appendChild(style);
@@ -250,8 +286,8 @@ var CP = CP || {};
             elements.commandPalette.getElementsByTagName('input')[0].value = '';
 
             // Reset the palette to the first option and remove the input value
-            model.selected(0);
-            model.command('');
+            commandPaletteModel.selected = 0;
+            commandPaletteModel.command = '';
         }
     }
 
@@ -268,11 +304,11 @@ var CP = CP || {};
     // Add the event handlers to hot keys
     function eventHandlers() {
         visibleHotkeyHanlder('esc', hideInput);
-        visibleHotkeyHanlder('up', model.moveUp);
-        visibleHotkeyHanlder('down', model.moveDown);
-        visibleHotkeyHanlder('pageup', model.movePageUp);
-        visibleHotkeyHanlder('pagedown', model.movePageDown);
-        visibleHotkeyHanlder('enter', model.runFunction);
+        visibleHotkeyHanlder('up', commandPaletteModel.moveUp);
+        visibleHotkeyHanlder('down', commandPaletteModel.moveDown);
+        visibleHotkeyHanlder('pageup', commandPaletteModel.movePageUp);
+        visibleHotkeyHanlder('pagedown', commandPaletteModel.movePageDown);
+        visibleHotkeyHanlder('enter', commandPaletteModel.runFunction);
 
         // If the user clicks outside the palette, hide the pallete
         window.onclick = function (e) {
@@ -291,6 +327,7 @@ var CP = CP || {};
         isInitialised = true;
 
         appendStyles();
+        createLiveValueBinding();
         createCommandPalette();
         eventHandlers();
     }
