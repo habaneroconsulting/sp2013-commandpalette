@@ -26,7 +26,7 @@ Otherwise, you can contact the author over Twitter at [@cwlparsons](https://twit
 
 1. Install [NodeJS](http://nodejs.org/)
 
-2. Install Grunt and Grunt CLI.
+2. Install Grunt CLI, bower, bower-installer.
 
         npm -g install grunt-cli bower bower-installer
 
