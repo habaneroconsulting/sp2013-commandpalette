@@ -1,16 +1,20 @@
 # Command Palette for SharePoint 2013
 
-## How It Works
-
 ![Command Palette Screenshot](http://i.imgur.com/FolLxHQ.png)
 
 ## Getting Started
 
-### Installing it in your SharePoint 2013 solution
+1. [Download the latest release of the script](https://github.com/habaneroconsulting/sp2013-commandpalette/releases/download/0.1.0/sp2013-commandpalette-0.1.0.min.js).
 
-#### Using SharePoint Designer
+2. Upload the JavaScript file to your `Style Library`.
 
-#### Using the included solution
+3. Edit your masterpage and add a reference to the new file. For example:
+
+        <script src="/Style Library/Scripts/sp2013-commandpalette-0.1.0.min.js"></script>
+
+4. Save and publish your masterpage.
+
+5. Go back to your portal and try it out by pressing Ctrl + Shift + L, or Command + Shift + L on a Mac.
 
 ## Support
 
@@ -30,8 +34,8 @@ Otherwise, you can contact the author over Twitter at [@cwlparsons](https://twit
 
 4. Use `grunt` to build:
 	
-	- `grunt bower` will download the various JavaScript dependencies, and copy them into the `source/vendor` folder
-    - `grunt plugin` will minify the source and copy the vendor files.
+    - `grunt bower` will download the various JavaScript dependencies, and copy them into the `source/vendor` folder
+    - `grunt build` will minify and concatenate the vendor and source files
 
 ## License
 
