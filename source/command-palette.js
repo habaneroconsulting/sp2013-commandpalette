@@ -116,13 +116,21 @@ var CP = CP || {};
 
         // Run the command
         palette.runFunction = function() {
-            var index = palette.selected;
+            if (arguments[1] && arguments[1].fn) {
+                try {
+                    arguments[1].fn();
+                } finally {
+                    hideInput();
+                }
+            } else {
+                var index = palette.selected;
 
-            try {
-                palette.filteredCommands()[index].fn();                
-            } finally {
-                hideInput();
-            }
+                try {
+                    palette.filteredCommands()[index].fn();
+                } finally {
+                    hideInput();
+                }
+            }            
         };
     }
 
@@ -153,7 +161,7 @@ var CP = CP || {};
     <input type="text" class="mousetrap" rv-live-value="palette.command"> \
     <ul class="sp-commandpalette-command-list"> \
         <li rv-each-command="palette.filteredCommands < command"> \
-            <a class="sp-commandpalette-command" rv-class-selected="command.selected" rv-text="command.command"></a> \
+            <a class="sp-commandpalette-command" rv-on-hover="palette.set" rv-on-click="palette.runFunction" rv-class-selected="command.selected" rv-text="command.command"></a> \
         </li> \
     </ul> \
 </div> \
@@ -220,7 +228,7 @@ var CP = CP || {};
             style.innerHTML = " \
 .sp-commandpalette { \
     background: #41454e; \
-    box-shadow: 0 0 30px 0 rgba(0,0,0,0.47); \
+    box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.5); \
     margin-left: -250px; \
     position: absolute; \
     top: 100px; \
@@ -262,9 +270,13 @@ var CP = CP || {};
     text-overflow: ellipsis; \
     white-space: nowrap; \
 } \
+.sp-commandpalette-command:hover { \
+    background: rgba(0, 114, 198, 0.5); \
+    color: #fff; \
+} \
 \
-.selected { \
-    background: #0072c6; \
+.sp-commandpalette .selected { \
+    background: rgba(0, 114, 198, 1); \
     color: #fff; \
 } \
             ";
