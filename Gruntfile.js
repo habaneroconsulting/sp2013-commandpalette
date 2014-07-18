@@ -30,7 +30,8 @@ module.exports = function(grunt) {
         pkg: grunt.file.readJSON('package.json'),
 
         clean: {
-            build: '<%= dirs.build %>/*'
+            build: '<%= dirs.build %>/*',
+            temp: '<%= dirs.tmp %>'
         },
 
         jshint: {
@@ -124,7 +125,7 @@ module.exports = function(grunt) {
     ]);
 
     grunt.registerTask('build', [
-        'jshint', 'uglify', 'concat'
+        'clean', 'jshint', 'uglify', 'concat', 'clean:temp'
     ]);
 
     grunt.registerTask('serve', [
