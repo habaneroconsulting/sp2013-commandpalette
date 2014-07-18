@@ -11,6 +11,7 @@ CP.Constants = CP.Constants || {};
         siteSettings: 'Site Settings',
         lookAndFeel: 'Look and Feel',
         siteCollectionAdmin: 'Site Collection Admin',
+        sharePointAdminCenter: 'SharePoint Admin Center',
         siteAdmin: 'Site Administration',
         usersAndPermissions: 'Users and Permissions',
         webDesignerGalleries: 'Web Designer Galleries',

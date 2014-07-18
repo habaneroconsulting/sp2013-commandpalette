@@ -36,11 +36,12 @@ var CP = CP || {};
             }
             // Filter the results
             else {
-                palette.set(0);
-
                 palette.filteredList = palette.list.filter(function(item) {
                     return item.command.toLowerCase().indexOf(filter) > -1;
                 });
+
+                // Reset selected state
+                palette.set(0);
 
                 return palette.filteredList;
             }
@@ -57,7 +58,10 @@ var CP = CP || {};
             palette.selected = index;
 
             // Select command for model
-            palette.filteredList[index].selected = true;
+            if (palette.filteredList.length > 0) {
+                palette.filteredList[index].selected = true;
+            }
+
             elements.commandList.scrollTop = (index - constants.indexOfMiddleCommand) * constants.commandHeight;
         };
 
