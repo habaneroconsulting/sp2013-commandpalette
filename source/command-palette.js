@@ -9,6 +9,7 @@ var CP = CP || {};
     var constants = {
             commandHeight: 30,
             indexOfMiddleCommand: 5,
+            pageHeight: 10
         },
         elements = {},
         isInitialised = false,
@@ -94,10 +95,10 @@ var CP = CP || {};
             // If the user is already on the bottom most command, go back to the top
             if (palette.selected === palette.filteredList.length - 1) {
                 palette.set(0);
-            } else if (palette.selected > palette.filteredList.length - 10) {
+            } else if (palette.selected > palette.filteredList.length - constants.pageHeight) {
                 palette.set(palette.filteredList.length - 1);
             } else {
-                palette.move(10);
+                palette.move(pageHeight);
             }
         };
 
@@ -106,10 +107,10 @@ var CP = CP || {};
             // If the user is on the top most command, go to the bottom
             if (palette.selected === 0) {
                 palette.set(palette.filteredList.length - 1);
-            } else if (palette.selected < 10) {
+            } else if (palette.selected < constants.pageHeight) {
                 palette.set(0);
             } else {
-                palette.move(-10);
+                palette.move(-constants.pageHeight);
             }
         };
 
