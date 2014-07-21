@@ -116,17 +116,19 @@ var CP = CP || {};
 
         // Run the command
         palette.runFunction = function() {
+            // If argument[1] is a event object from clicking on a command
             if (arguments[1] && arguments[1].fn) {
+                // Try to run the command that was sent through
                 try {
                     arguments[1].fn();
                 } finally {
                     hideInput();
                 }
-            } else {
-                var index = palette.selected;
-
+            }
+            // Otherwise, it is from an enter press, run the selected command
+            else {
                 try {
-                    palette.filteredCommands()[index].fn();
+                    palette.filteredCommands()[palette.selected].fn();
                 } finally {
                     hideInput();
                 }
@@ -161,11 +163,14 @@ var CP = CP || {};
     <input type="text" class="mousetrap" rv-live-value="palette.command"> \
     <ul class="sp-commandpalette-command-list"> \
         <li rv-each-command="palette.filteredCommands < command"> \
-            <a class="sp-commandpalette-command" rv-on-hover="palette.set" rv-on-click="palette.runFunction" rv-class-selected="command.selected" rv-text="command.command"></a> \
+            <a class="sp-commandpalette-command" \
+               rv-on-hover="palette.set" \
+               rv-on-click="palette.runFunction" \
+               rv-class-selected="command.selected" \
+               rv-text="command.command"></a> \
         </li> \
     </ul> \
-</div> \
-            ';
+</div>';
 
             elements.commandPalette = document.createElement('div');
             elements.commandPalette.id = 'sp-commandpalette';
@@ -225,7 +230,7 @@ var CP = CP || {};
         elements.head = document.getElementsByTagName('head')[0];
 
         var style = document.createElement('style');
-            style.innerHTML = " \
+            style.innerHTML = ' \
 .sp-commandpalette { \
     background: #41454e; \
     box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.5); \
@@ -278,8 +283,7 @@ var CP = CP || {};
 .sp-commandpalette .selected { \
     background: rgba(0, 114, 198, 1); \
     color: #fff; \
-} \
-            ";
+}';
 
         elements.head.appendChild(style);
     }
@@ -300,13 +304,15 @@ var CP = CP || {};
     // Hide the palette
     function hideInput() {
         if (elements.commandPalette) {
-            elements.commandPalette.style['display'] = 'none';
-            elements.commandPalette.getElementsByTagName('input')[0].value = '';
-
             // Reset the palette to the first option and remove the input value
             model.set(0);
             model.filteredList = model.list;
             model.command = '';
+
+            // Need to reset before setting display to none so we can scroll the
+            // command list back to top
+            elements.commandPalette.style['display'] = 'none';
+            elements.commandPalette.getElementsByTagName('input')[0].value = '';
         }
     }
 
