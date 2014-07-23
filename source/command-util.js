@@ -26,6 +26,11 @@ CP.Util = CP.Util || {};
         window.location = window.location.origin.replace('.sharepoint.com', '-admin.sharepoint.com') + path;
     };
 
+    // Go to a SharePoint Online admin center page
+    module.goToSPOMySite = function(path) {
+        window.location = window.location.origin.replace('.sharepoint.com', '-my.sharepoint.com') + path;
+    };
+
     // Returns the site type based on a site template ID
     module.getSiteType = function() {
         var siteType = CP.Constants.SiteTypes;

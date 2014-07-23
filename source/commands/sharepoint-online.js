@@ -12,6 +12,20 @@ var CP = CP || {};
 
     CP.CommandList = CP.CommandList.concat([
         {
+            command: 'SharePoint Online My Site',
+            exclude: [versionType.premise],
+            fn: function () {
+                util.goToSPOMySite('/');
+            }
+        },
+        {
+            command: 'SharePoint Online My Site: Edit Profile',
+            exclude: [versionType.premise],
+            fn: function () {
+                util.goToSPOMySite('/_layouts/15/EditProfile.aspx');
+            }
+        },
+        {
             command: 'SharePoint Online Admin Center: Site Collections',
             exclude: [versionType.premise],
             fn: function () {
@@ -30,6 +44,104 @@ var CP = CP || {};
             exclude: [versionType.premise],
             fn: function () {
                 util.goToSPOAdmin('/_layouts/15/tenantprofileadmin/manageuserprofileserviceapplication.aspx');
+            }
+        },
+        {
+            command: 'SharePoint Admin Online: User Profiles: Manage User Properties',
+            exclude: [versionType.premise],
+            fn: function () {
+                util.goToSPOAdmin('/_layouts/15/tenantprofileadmin/MgrProperty.aspx?ProfileType=User&ApplicationID=00000000-0000-0000-0000-000000000000');
+            }
+        },
+        {
+            command: 'SharePoint Admin Online: User Profiles: Manage User Profiles',
+            exclude: [versionType.premise],
+            fn: function () {
+                util.goToSPOAdmin('/_layouts/15/tenantprofileadmin/ProfMngr.aspx?ConsoleView=Active&ProfileType=User&ApplicationID=00000000-0000-0000-0000-000000000000');
+            }
+        },
+        {
+            command: 'SharePoint Admin Online: User Profiles: Manage User Sub-types',
+            exclude: [versionType.premise],
+            fn: function () {
+                util.goToSPOAdmin('/_layouts/15/tenantprofileadmin/ManageSubTypes.aspx?ProfileType=User&ApplicationID=00000000-0000-0000-0000-000000000000');
+            }
+        },
+        {
+            command: 'SharePoint Admin Online: User Profiles: Manage Audiences',
+            exclude: [versionType.premise],
+            fn: function () {
+                util.goToSPOAdmin('/_layouts/15/tenantprofileadmin/Audience_List.aspx?ApplicationID=00000000-0000-0000-0000-000000000000');
+            }
+        },
+        {
+            command: 'SharePoint Admin Online: User Profiles: Manage User Permissions',
+            exclude: [versionType.premise],
+            fn: function () {
+                util.goToSPOAdmin('/_layouts/15/tenantprofileadmin/UserProfileApplicationPermissions.aspx?ApplicationID=00000000-0000-0000-0000-000000000000');
+            }
+        },
+        {
+            command: 'SharePoint Admin Online: User Profiles: Manage Policies',
+            exclude: [versionType.premise],
+            fn: function () {
+                util.goToSPOAdmin('/_layouts/15/tenantprofileadmin/ManagePrivacyPolicy.aspx?ApplicationID=00000000-0000-0000-0000-000000000000');
+            }
+        },
+        {
+            command: 'SharePoint Admin Online: User Profiles: Manage Organization Properties',
+            exclude: [versionType.premise],
+            fn: function () {
+                util.goToSPOAdmin('/_layouts/15/tenantprofileadmin/MgrProperty.aspx?ProfileType=Organization&ApplicationID=00000000-0000-0000-0000-000000000000');
+            }
+        },
+        {
+            command: 'SharePoint Admin Online: User Profiles: Manage Organization Profiles',
+            exclude: [versionType.premise],
+            fn: function () {
+                util.goToSPOAdmin('/_layouts/15/tenantprofileadmin/ProfMngr.aspx?ConsoleView=Active&ProfileType=Organization&ApplicationID=00000000-0000-0000-0000-000000000000');
+            }
+        },
+        {
+            command: 'SharePoint Admin Online: User Profiles: Manage Organization Sub-types',
+            exclude: [versionType.premise],
+            fn: function () {
+                util.goToSPOAdmin('/_layouts/15/tenantprofileadmin/ManageSubTypes.aspx?ProfileType=Organization&ApplicationID=00000000-0000-0000-0000-000000000000');
+            }
+        },
+        {
+            command: 'SharePoint Admin Online: User Profiles: Setup My Sites',
+            exclude: [versionType.premise],
+            fn: function () {
+                util.goToSPOAdmin('/_layouts/15/tenantprofileadmin/PersonalSites.aspx?ApplicationID=00000000-0000-0000-0000-000000000000');
+            }
+        },
+        {
+            command: 'SharePoint Admin Online: User Profiles: Configure Trusted Host Locations',
+            exclude: [versionType.premise],
+            fn: function () {
+                util.goToSPOAdmin('/_layouts/15/tenantprofileadmin/ManageLinks.aspx?LinksType=0&ApplicationID=00000000-0000-0000-0000-000000000000');
+            }
+        },
+        {
+            command: 'SharePoint Admin Online: User Profiles: Manage Promoted Sites',
+            exclude: [versionType.premise],
+            fn: function () {
+                util.goToSPOAdmin('/_layouts/15/tenantprofileadmin/ManageLinks.aspx?LinksType=1&ApplicationID=00000000-0000-0000-0000-000000000000');
+            }
+        },
+        {
+            command: 'SharePoint Admin Online: User Profiles: Publish Links to Office Client Applications',
+            exclude: [versionType.premise],
+            fn: function () {
+                util.goToSPOAdmin('/_layouts/15/tenantprofileadmin/ManageLinks.aspx?LinksType=2&ApplicationID=00000000-0000-0000-0000-000000000000');
+            }
+        },
+        {
+            command: 'SharePoint Admin Online: User Profiles: Manage Social Tags and Notes',
+            exclude: [versionType.premise],
+            fn: function () {
+                util.goToSPOAdmin('/_layouts/15/tenantprofileadmin/ManageSocialItems.aspx?ApplicationID=00000000-0000-0000-0000-000000000000');
             }
         },
         {
@@ -71,7 +183,7 @@ var CP = CP || {};
             command: 'SharePoint Online Admin Center: Search Admin: Manage Search Dictionaries',
             exclude: [versionType.premise],
             fn: function () {
-                util.goToSPOAdmin('/_layouts/15/searchadmin//_layouts/15/termstoremanager.aspx');
+                util.goToSPOAdmin('/_layouts/15/searchadmin/_layouts/15/termstoremanager.aspx');
             }
         },
         {
