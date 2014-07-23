@@ -92,7 +92,8 @@ module.exports = function(grunt) {
                     ]                    
                 },
                 options: {
-                    banner: '/* sp2013-commandpalette.min.js - Habanero Consulting Group */\r\n\r\n'
+                    banner: '/* sp2013-commandpalette.min.js - Habanero Consulting Group */\r\n\r\n',
+                    separator: '\r\n\r\n'
                 }
             }
         },
