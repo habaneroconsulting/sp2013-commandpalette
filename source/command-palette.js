@@ -38,7 +38,11 @@ var CP = CP || {};
             // Filter the results
             else {
                 palette.filteredList = palette.list.filter(function(item) {
-                    return item.command.toLowerCase().indexOf(filter) > -1;
+                    var pattern = filter.split('').reduce(function(a,b) {
+                        return  a + '.*' + b; 
+                    });
+
+                    return (new RegExp(pattern)).test(item.command);
                 });
 
                 // Reset selected state
@@ -98,7 +102,7 @@ var CP = CP || {};
             } else if (palette.selected > palette.filteredList.length - constants.pageHeight) {
                 palette.set(palette.filteredList.length - 1);
             } else {
-                palette.move(pageHeight);
+                palette.move(constants.pageHeight);
             }
         };
 
