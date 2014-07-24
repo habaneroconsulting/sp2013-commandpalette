@@ -21,7 +21,7 @@ var CP = CP || {};
      */
     function CommandPaletteModel() {
         var palette = this;
-        
+
         palette.list = getCommandList();
         palette.filteredList = palette.list;
         palette.command  = '';
@@ -29,7 +29,7 @@ var CP = CP || {};
 
         // Filter commands based on the typed keyword
         palette.filteredCommands = function() {
-            var filter = palette.command.toLowerCase();
+            var filter = palette.command;
 
             // If there is no word, show all commands
             if (!filter) {
@@ -37,12 +37,12 @@ var CP = CP || {};
             }
             // Filter the results
             else {
-                palette.filteredList = palette.list.filter(function(item) {
-                    var pattern = filter.split('').reduce(function(a,b) {
-                        return  a + '.*' + b; 
-                    });
+                var pattern = filter.toLowerCase().split('').reduce(function(a, b) {
+                    return  a + '.*' + b;
+                });
 
-                    return (new RegExp(pattern)).test(item.command);
+                palette.filteredList = palette.list.filter(function(item) {
+                    return (new RegExp(pattern)).test(item.command.toLowerCase());
                 });
 
                 // Reset selected state
@@ -136,7 +136,7 @@ var CP = CP || {};
                 } finally {
                     hideInput();
                 }
-            }            
+            }
         };
     }
 
