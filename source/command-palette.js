@@ -37,12 +37,8 @@ var CP = CP || {};
             }
             // Filter the results
             else {
-                var pattern = filter.toLowerCase().split('').reduce(function(a, b) {
-                    return  a + '.*' + b;
-                });
-
                 palette.filteredList = palette.list.filter(function(item) {
-                    return (new RegExp(pattern)).test(item.command.toLowerCase());
+                    return item.command.toLowerCase().indexOf(filter.toLowerCase()) > -1;
                 });
 
                 // Reset selected state
@@ -132,7 +128,7 @@ var CP = CP || {};
             // Otherwise, it is from an enter press, run the selected command
             else {
                 try {
-                    palette.filteredCommands()[palette.selected].fn();
+                    palette.filteredList[palette.selected].fn();
                 } finally {
                     hideInput();
                 }
