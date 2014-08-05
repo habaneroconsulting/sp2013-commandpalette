@@ -158,19 +158,18 @@ var CP = CP || {};
     function createCommandPalette() {
         if (!elements.commandPalette) {
             // HTML to create the palette
-            var html = '\
-<div class="sp-commandpalette"> \
-    <input type="text" class="mousetrap" rv-live-value="palette.command"> \
-    <ul class="sp-commandpalette-command-list"> \
-        <li rv-each-command="palette.filteredCommands < command"> \
-            <a class="sp-commandpalette-command" \
-               rv-on-hover="palette.set" \
-               rv-on-click="palette.runFunction" \
-               rv-class-selected="command.selected" \
-               rv-text="command.command"></a> \
-        </li> \
-    </ul> \
-</div>';
+            var html = '<div class="sp-commandpalette">' +
+    '<input type="text" class="mousetrap" rv-live-value="palette.command">' +
+    '<ul class="sp-commandpalette-command-list">' +
+        '<li rv-each-command="palette.filteredCommands < command">' +
+            '<a class="sp-commandpalette-command"' +
+               ' rv-on-hover="palette.set"' +
+               ' rv-on-click="palette.runFunction"' +
+               ' rv-class-selected="command.selected"' +
+               ' rv-text="command.command"></a>' +
+        '</li>' +
+    '</ul>' +
+'</div>';
 
             elements.commandPalette = document.createElement('div');
             elements.commandPalette.id = 'sp-commandpalette';
@@ -230,60 +229,55 @@ var CP = CP || {};
         elements.head = document.getElementsByTagName('head')[0];
 
         var style = document.createElement('style');
-            style.innerHTML = ' \
-.sp-commandpalette { \
-    background: #41454e; \
-    box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.5); \
-    margin-left: -250px; \
-    position: absolute; \
-    top: 100px; \
-    left: 50%; \
-    width: 500px; \
-    z-index: 9999; \
-} \
-\
-.sp-commandpalette input { \
-    background: #e6e6e6; \
-    box-sizing: border-box; \
-    font-size: 24px; \
-    height: 40px; \
-    margin: 5px; \
-    width: 490px; \
-} \
-\
-.sp-commandpalette p { \
-    color: #e6e6e6; \
-    margin: 10px; \
-    margin-top: 5px; \
-} \
-\
-.sp-commandpalette-command-list { \
-    list-style: none; \
-    margin: 0px 5px 5px; \
-    max-height: 330px; \
-    overflow-y: auto; \
-    padding: 0; \
-} \
-\
-.sp-commandpalette-command { \
-    color: #e6e6e6; \
-    cursor: pointer; \
-    display: block; \
-    height: 20px; \
-    overflow: hidden; \
-    padding: 5px; \
-    text-overflow: ellipsis; \
-    white-space: nowrap; \
-} \
-.sp-commandpalette-command:hover { \
-    background: rgba(0, 114, 198, 0.5); \
-    color: #fff; \
-} \
-\
-.sp-commandpalette .selected { \
-    background: rgba(0, 114, 198, 1); \
-    color: #fff; \
-}';
+            style.innerHTML = '' +
+'.sp-commandpalette {' +
+    'background: #41454e;' +
+    'box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.5);' +
+    'margin-left: -250px;' +
+    'position: absolute;' +
+    'top: 100px;' +
+    'left: 50%;' +
+    'width: 500px;' +
+    'z-index: 9999;' +
+'}' +
+'.sp-commandpalette input {' +
+    'background: #e6e6e6;' +
+    'box-sizing: border-box;' +
+    'font-size: 24px;' +
+    'height: 40px;' +
+    'margin: 5px;' +
+    'width: 490px;' +
+'}' +
+'.sp-commandpalette p {' +
+    'color: #e6e6e6;' +
+    'margin: 10px;' +
+    'margin-top: 5px;' +
+'}' +
+'.sp-commandpalette-command-list {' +
+    'list-style: none;' +
+    'margin: 0px 5px 5px;' +
+    'max-height: 330px;' +
+    'overflow-y: auto;' +
+    'padding: 0;' +
+'}' +
+'.sp-commandpalette-command {' +
+    'color: #e6e6e6;' +
+    'cursor: pointer;' +
+    'display: block;' +
+    'height: 20px;' +
+    'overflow: hidden;' +
+    'padding: 5px;' +
+    'text-overflow: ellipsis;' +
+    'white-space: nowrap;' +
+'}' +
+'.sp-commandpalette-command:hover {' +
+    'background: rgba(0, 114, 198, 0.5);' +
+    'color: #fff;' +
+'}' +
+'.sp-commandpalette .selected {' +
+    'background: rgba(0, 114, 198, 1);' +
+    'color: #fff;' +
+'}';
 
         elements.head.appendChild(style);
     }
