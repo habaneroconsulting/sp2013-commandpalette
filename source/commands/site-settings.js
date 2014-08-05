@@ -189,7 +189,7 @@ var CP = CP || {};
         {
             command: strings.siteSettings + ': Search: Result Sources',
             fn: function () {
-                util.goToPage(strings.layouts + 'manageresultsources.aspx');
+                util.goToPage(strings.layouts + 'manageresultsources.aspx?level=site');
             }
         },
         {

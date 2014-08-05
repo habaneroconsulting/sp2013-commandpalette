@@ -232,7 +232,7 @@ var CP = CP || {};
             command: 'SharePoint Online Admin Center: Search Admin: View Usage Reports',
             exclude: [versionType.premise],
             fn: function () {
-                util.goToSPOAdmin('/_layouts/15/searchadmin//_layouts/15/reporting.aspx?Category=AnalyticsSearch');
+                util.goToSPOAdmin('/_layouts/15/searchadmin/_layouts/15/reporting.aspx?Category=AnalyticsSearch');
             }
         },
         {
