@@ -5,6 +5,8 @@ var CP = CP || {};
 CP.Util = CP.Util || {};
 
 (function(module) {
+    // Open in a new window
+    module.openInNewWindow = false;
 
     // Get the web server relative URL
     module.getWebServerRelativeUrl = function() {
@@ -13,7 +15,11 @@ CP.Util = CP.Util || {};
 
     // Run SharePoint's GoToPage functionality, with the relative server URL
     module.goToPage = function(relativePath) {
-        GoToPage(_spPageContextInfo.webServerRelativeUrl + relativePath);
+        if (module.openInNewWindow) {
+            window.open(window.location.origin + _spPageContextInfo.webServerRelativeUrl + relativePath, '_blank');
+        } else {
+            window.location = window.location.origin + _spPageContextInfo.webServerRelativeUrl + relativePath;
+        }
     };
 
     // Go to a central administration page

@@ -333,7 +333,17 @@ var CP = CP || {};
         visibleHotkeyHanlder('down', model.moveDown);
         visibleHotkeyHanlder('pageup', model.movePageUp);
         visibleHotkeyHanlder('pagedown', model.movePageDown);
-        visibleHotkeyHanlder('enter', model.runFunction);
+
+        visibleHotkeyHanlder('enter', function() {
+            util.openInNewWindow = false;
+            model.runFunction();
+        });
+
+        // Open page in a new window
+        visibleHotkeyHanlder(['shift+enter', 'ctrl+enter'], function() {
+            util.openInNewWindow = true;
+            model.runFunction();
+        });
 
         // If the user clicks outside the palette, hide the pallete
         window.onclick = function (e) {
