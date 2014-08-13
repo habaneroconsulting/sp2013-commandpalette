@@ -13,28 +13,33 @@ CP.Util = CP.Util || {};
         return (_spPageContextInfo.webServerRelativeUrl === '/') ? _spPageContextInfo.webServerRelativeUrl : _spPageContextInfo.webServerRelativeUrl + '/';
     };
 
-    // Run SharePoint's GoToPage functionality, with the relative server URL
-    module.goToPage = function(relativePath) {
+    // Open a URL in a new tab or in the current tab
+    module.goTo = function (url) {
         if (module.openInNewWindow) {
-            window.open(window.location.origin + _spPageContextInfo.webServerRelativeUrl + relativePath, '_blank');
+            window.open(url, '_blank');
         } else {
-            window.location = window.location.origin + _spPageContextInfo.webServerRelativeUrl + relativePath;
+            window.location = url;
         }
+    };
+
+    // Go to a specific page, with the relative server URL
+    module.goToPage = function(relativePath) {
+        module.goTo(window.location.origin + _spPageContextInfo.webServerRelativeUrl + relativePath);
     };
 
     // Go to a central administration page
     module.goToCentralAdmin = function(path) {
-        window.location = window.location.origin + ':11111' + path;
+        module.goTo(window.location.origin + ':11111' + path);
     };
 
     // Go to a SharePoint Online admin center page
     module.goToSPOAdmin = function(path) {
-        window.location = window.location.origin.replace('.sharepoint.com', '-admin.sharepoint.com') + path;
+        module.goTo(window.location.origin.replace('.sharepoint.com', '-admin.sharepoint.com') + path);
     };
 
     // Go to a SharePoint Online admin center page
     module.goToSPOMySite = function(path) {
-        window.location = window.location.origin.replace('.sharepoint.com', '-my.sharepoint.com') + path;
+        module.goTo(window.location.origin.replace('.sharepoint.com', '-my.sharepoint.com') + path);
     };
 
     // Returns the site type based on a site template ID
