@@ -10,7 +10,7 @@
 
 3. Edit your masterpage and add a reference to the new file. For example:
 
-        <script src="/Style Library/Scripts/sp2013-commandpalette-0.2.0.min.js"></script>
+        <script src="/Style Library/Scripts/sp2013-commandpalette-0.2.1.min.js"></script>
 
 4. Save and publish your masterpage.
 

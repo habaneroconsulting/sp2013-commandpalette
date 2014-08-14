@@ -6,7 +6,7 @@
 
 module.exports = function(grunt) {
     'use strict';
-    
+
     /**
      * Load required Grunt tasks.
      */
@@ -35,7 +35,7 @@ module.exports = function(grunt) {
         },
 
         jshint: {
-            source: [ 
+            source: [
                 '<%= dirs.source %>/*.js',
                 '<%= dirs.source %>/commands/*.js'
             ],
@@ -89,10 +89,10 @@ module.exports = function(grunt) {
                         '<%= dirs.tmp %>/command-util.min.js',
                         '<%= dirs.tmp %>/commands/*.js',
                         '<%= dirs.tmp %>/command-palette.min.js'
-                    ]                    
+                    ]
                 },
                 options: {
-                    banner: '/* sp2013-commandpalette.min.js - Habanero Consulting Group */\r\n\r\n',
+                    banner: '/*!\r\n * sp2013-commandpalette.min.js\r\n * Habanero Consulting Group\r\n * Licensed under MIT \r\n */\r\n\r\n',
                     separator: '\r\n\r\n'
                 }
             }
