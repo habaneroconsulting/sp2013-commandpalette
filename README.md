@@ -4,13 +4,13 @@
 
 ## Getting Started
 
-1. [Download the latest release of the script](https://github.com/habaneroconsulting/sp2013-commandpalette/releases/download/0.2.0/sp2013-commandpalette-0.2.0.min.js).
+1. [Download the latest release of the script](https://github.com/habaneroconsulting/sp2013-commandpalette/releases/latest).
 
 2. Upload the JavaScript file to your `Style Library`.
 
 3. Edit your masterpage and add a reference to the new file. For example:
 
-        <script src="/Style Library/Scripts/sp2013-commandpalette-0.2.1.min.js"></script>
+        <script src="/Style Library/Scripts/sp2013-commandpalette.min.js"></script>
 
 4. Save and publish your masterpage.
 
