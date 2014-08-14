@@ -24,6 +24,7 @@ var CP = CP || {};
 
         palette.list = getCommandList();
         palette.filteredList = palette.list;
+        palette.isEmpty = false;
         palette.command  = '';
         palette.selected = 0;
 
@@ -33,6 +34,7 @@ var CP = CP || {};
 
             // If there is no word, show all commands
             if (!filter) {
+                palette.isEmpty = false;
                 return palette.list;
             }
             // Filter the results
@@ -40,6 +42,12 @@ var CP = CP || {};
                 palette.filteredList = palette.list.filter(function(item) {
                     return item.command.toLowerCase().indexOf(filter.toLowerCase()) > -1;
                 });
+
+                if (palette.filteredList.length === 0) {
+                    palette.isEmpty = true;
+                } else {
+                    palette.isEmpty = false;
+                }
 
                 // Reset selected state
                 palette.set(0);
@@ -114,6 +122,14 @@ var CP = CP || {};
             }
         };
 
+        palette.reset = function() {
+            // Reset the palette to the first option and remove the input value
+            palette.set(0);
+            palette.filteredList = palette.list;
+            palette.command = '';
+            palette.isEmpty = false;
+        };
+
         // Run the command
         palette.runFunction = function() {
             // If argument[1] is a event object from clicking on a command
@@ -161,6 +177,7 @@ var CP = CP || {};
             var html = '<div class="sp-commandpalette">' +
     '<input type="text" class="mousetrap" rv-live-value="palette.command">' +
     '<ul class="sp-commandpalette-command-list">' +
+        '<li class="sp-commandpalette-empty" rv-show="palette.isEmpty" style="display: none;">No commands match your query.</li>' +
         '<li rv-each-command="palette.filteredCommands < command">' +
             '<a class="sp-commandpalette-command"' +
                ' rv-on-hover="palette.set"' +
@@ -246,12 +263,19 @@ var CP = CP || {};
     'font-size: 24px;' +
     'height: 40px;' +
     'margin: 5px;' +
+    'padding: 4px 4px 0;' +
     'width: 490px;' +
 '}' +
 '.sp-commandpalette p {' +
     'color: #e6e6e6;' +
     'margin: 10px;' +
     'margin-top: 5px;' +
+'}' +
+'.sp-commandpalette-empty {' +
+    'color: #e6e6e6;' +
+    'height: 20px;' +
+    'overflow: hidden;' +
+    'padding: 5px;' +
 '}' +
 '.sp-commandpalette-command-list {' +
     'list-style: none;' +
@@ -298,10 +322,7 @@ var CP = CP || {};
     // Hide the palette
     function hideInput() {
         if (elements.commandPalette) {
-            // Reset the palette to the first option and remove the input value
-            model.set(0);
-            model.filteredList = model.list;
-            model.command = '';
+            model.reset();
 
             // Need to reset before setting display to none so we can scroll the
             // command list back to top
