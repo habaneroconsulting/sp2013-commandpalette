@@ -1,11 +1,11 @@
-/*! 
+/*!
  *  commands/sharepoint-online.js
  */
 var CP = CP || {};
 
 (function (constants, util) {
     var siteType = constants.SiteTypes,
-        strings = constants.strings,
+        strings = constants.Strings,
         versionType = constants.VersionTypes;
 
     CP.CommandList = CP.CommandList || [];

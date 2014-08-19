@@ -1,18 +1,12 @@
-/*! 
+/*!
  *  commands/misc.js
  */
 var CP = CP || {};
 
-(function (constants, util) {    
+(function (constants, util) {
     CP.CommandList = CP.CommandList || [];
 
     CP.CommandList = CP.CommandList.concat([
-        {
-            command: 'View all site content',
-            fn: function () {
-                window.open(window.location.origin + '/' + _spPageContextInfo.webServerRelativeUrl + '/_layouts/viewlsts.aspx');
-            }
-        },
         {
             command: 'Web part maintance page',
             fn: function () {
