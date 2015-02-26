@@ -4,7 +4,7 @@
  * Habanero Consulting Group - Licensed under MIT
  */
 
-module.exports = function(grunt) {
+module.exports = function (grunt) {
     'use strict';
 
     /**
@@ -34,30 +34,29 @@ module.exports = function(grunt) {
             temp: '<%= dirs.tmp %>'
         },
 
-        jshint: {
+        jscs: {
+            options: {
+                config: '.jscsrc'
+            },
             source: [
                 '<%= dirs.source %>/*.js',
                 '<%= dirs.source %>/commands/*.js'
-            ],
+            ]
+        },
+
+        jshint: {
             gruntfile: [
                 'Gruntfile.js'
             ],
             options: {
-                ignores: ['/**/*.min.js'],
-                curly: true,
-                immed: true,
-                newcap: false,
-                noarg: true,
-                debug: true,
-                sub: true,
-                boss: true,
-                eqnull: true,
-                multistr: true,
-                scripturl: true,
-                smarttabs: true,
-                '-W099': true,
-                loopfunc: true
-            }
+                jshintrc: '.jshintrc',
+                ignores: ['/**/*.min.js']
+            },
+            source: [
+                '<%= dirs.source %>/*.js',
+                '<%= dirs.source %>/commands/*.js',
+                '!<%= dirs.source %>/commands/site-actions.js'
+            ]
         },
 
         uglify: {
