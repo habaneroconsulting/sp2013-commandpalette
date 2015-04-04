@@ -82,7 +82,7 @@ module.exports = function (grunt) {
 		concat: {
 			source: {
 				files: {
-					'<%= dirs.build %>/sp2013-commandpalette.min.js': [
+					'<%= dirs.build %>/sp2013-commandpalette-<%= pkg.version %>.min.js': [
 						'<%= dirs.tmp %>/command-constants.min.js',
 						'<%= dirs.tmp %>/command-util.min.js',
 						'<%= dirs.tmp %>/commands/*.js',
@@ -90,13 +90,13 @@ module.exports = function (grunt) {
 					]
 				},
 				options: {
-					banner: '/*!\r\n * sp2013-commandpalette.min.js\r\n * Habanero Consulting Group\r\n * Licensed under MIT\r\n */\r\n\r\n',
+					banner: '/*!\r\n * sp2013-commandpalette-<%= pkg.version %>.min.js\r\n * Habanero Consulting Group\r\n * Licensed under MIT\r\n */\r\n\r\n',
 					separator: '\r\n\r\n'
 				}
 			},
 			pkg: {
 				files: {
-					'<%= dirs.build %>/sp2013-commandpalette.pkg.min.js': [
+					'<%= dirs.build %>/sp2013-commandpalette-<%= pkg.version %>.pkg.min.js': [
 						'<%= dirs.tmp %>/vendor/**/*.js',
 						'<%= dirs.vendor %>/**/*.min.js',
 						'<%= dirs.tmp %>/command-constants.min.js',
@@ -106,7 +106,7 @@ module.exports = function (grunt) {
 					]
 				},
 				options: {
-					banner: '/*!\r\n * sp2013-commandpalette.pkg.min.js\r\n * Habanero Consulting Group\r\n * Licensed under MIT\r\n */\r\n\r\n',
+					banner: '/*!\r\n * sp2013-commandpalette-<%= pkg.version %>.pkg.min.js\r\n * Habanero Consulting Group\r\n * Licensed under MIT\r\n */\r\n\r\n',
 					separator: '\r\n\r\n'
 				}
 			}

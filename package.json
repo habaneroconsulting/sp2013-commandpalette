@@ -1,7 +1,7 @@
 {
   "name": "sp2013-commandpalette",
   "description": "A command palette for faster access of frequent SharePoint actions.",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "author": "Habanero Consulting Group",
   "contributors": [
     {
