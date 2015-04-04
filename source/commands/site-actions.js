@@ -57,7 +57,7 @@ var CP = CP || {};
 			command: 'Office 365 settings',
 			exclude: [versionType.premise],
 			fn: function () {
-				GoToPage('https://portal.microsoftonline.com/EditProfile15.aspx');
+				util.goTo('https://portal.microsoftonline.com/EditProfile15.aspx');
 			}
 		}
 	]);
