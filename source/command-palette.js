@@ -23,9 +23,10 @@ var CP = CP || {};
 		var palette = this;
 
 		palette.list = getCommandList();
+
+		palette.command  = '';
 		palette.filteredList = palette.list;
 		palette.isEmpty = false;
-		palette.command  = '';
 		palette.selected = 0;
 
 		// Filter commands based on the typed keyword
@@ -36,7 +37,7 @@ var CP = CP || {};
 			if (!filter) {
 				palette.isEmpty = false;
 
-				return palette.list;
+				palette.filteredList = palette.list;
 			} else {
 				// Filter the results
 				palette.filteredList = palette.list.filter(function (item) {
@@ -48,12 +49,12 @@ var CP = CP || {};
 				} else {
 					palette.isEmpty = false;
 				}
-
-				// Reset selected state
-				palette.set(0);
-
-				return palette.filteredList;
 			}
+
+			// Reset selected state
+			palette.set(0);
+
+			return palette.filteredList;
 		};
 
 		// Set the command to a specific index
@@ -289,6 +290,7 @@ var CP = CP || {};
 				'cursor: pointer;' +
 				'display: block;' +
 				'height: 20px;' +
+				'line-height: 20px;' +
 				'overflow: hidden;' +
 				'padding: 5px;' +
 				'text-overflow: ellipsis;' +
@@ -349,15 +351,15 @@ var CP = CP || {};
 		visibleHotkeyHanlder('pageup', model.movePageUp);
 		visibleHotkeyHanlder('pagedown', model.movePageDown);
 
-		visibleHotkeyHanlder('enter', function () {
-			util.openInNewWindow = false;
-			model.runfunction ();
+		// Open page in a new window
+		visibleHotkeyHanlder(['shift+enter', 'mod+enter'], function () {
+			util.openInNewWindow = true;
+			model.runFunction();
 		});
 
-		// Open page in a new window
-		visibleHotkeyHanlder(['shift+enter', 'ctrl+enter'], function () {
-			util.openInNewWindow = true;
-			model.runfunction ();
+		visibleHotkeyHanlder('enter', function () {
+			util.openInNewWindow = false;
+			model.runFunction();
 		});
 
 		// If the user clicks outside the palette, hide the pallete
