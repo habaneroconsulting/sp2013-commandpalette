@@ -24,16 +24,12 @@ If you have a bug, or a feature request, please post in the [issue tracker](http
 
 1. Install [NodeJS](http://nodejs.org/)
 
-2. Install Grunt CLI, bower, bower-installer.
+2. Run `npm install` from command line at root project folder.
 
-        npm -g install grunt-cli bower bower-installer
+3. Use the following commands:
 
-3. Run `npm install` from command line at root project folder
-
-4. Use `grunt` to build:
-
-    - `grunt bower` will download the various JavaScript dependencies, and copy them into the `source/vendor` folder
-    - `grunt build` will minify and concatenate the vendor and source files
+    - `npm start` will minify and concatenate the vendor and source files
+    - `npm test` will run all code through linting
 
 ## License
 

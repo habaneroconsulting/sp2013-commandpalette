@@ -36,7 +36,7 @@ module.exports = function (grunt) {
 
 		jscs: {
 			options: {
-				config: '.jscsrc'
+				config: 'node_modules/habanero-code-style/js/.jscsrc'
 			},
 			source: [
 				'<%= dirs.source %>/*.js',
@@ -45,16 +45,14 @@ module.exports = function (grunt) {
 		},
 
 		jshint: {
-			gruntfile: [
-				'Gruntfile.js'
-			],
 			options: {
-				jshintrc: '.jshintrc',
+				jshintrc: 'node_modules/habanero-code-style/js/.jshintrc',
 				ignores: ['/**/*.min.js']
 			},
 			source: [
 				'<%= dirs.source %>/*.js',
 				'<%= dirs.source %>/commands/*.js',
+				'!<%= dirs.source %>/commands/developer.js',
 				'!<%= dirs.source %>/commands/site-actions.js'
 			]
 		},
@@ -139,8 +137,12 @@ module.exports = function (grunt) {
 		'shell'
 	]);
 
+	grunt.registerTask('test', [
+		'jscs', 'jshint'
+	]);
+
 	grunt.registerTask('build', [
-		'clean', 'jscs', 'jshint', 'uglify', 'concat', 'clean:temp'
+		'clean', 'test', 'uglify', 'concat', 'clean:temp'
 	]);
 
 	grunt.registerTask('serve', [

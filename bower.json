@@ -1,10 +1,9 @@
 {
   "name": "sp2013-commandpalette",
-  "version": "0.2.2",
+  "version": "0.2.4",
   "homepage": "https://github.com/habaneroconsulting/sp2013-commandpalette",
   "description": "A command palette for faster access of frequent SharePoint actions.",
   "license": "MIT",
-  "private": true,
   "dependencies": {
     "mousetrap": "~1.5.2",
     "rivets": "~0.8.0"
