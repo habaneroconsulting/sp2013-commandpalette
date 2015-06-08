@@ -19,7 +19,7 @@
     "build": "grunt build",
     "install": "bower-installer",
     "start": "grunt build",
-    "test": "grunt test"
+    "test": "grunt build"
   },
   "devDependencies": {
     "bower-installer": "^1.2.0",

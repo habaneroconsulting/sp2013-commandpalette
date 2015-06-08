@@ -1,5 +1,9 @@
 # Command Palette for SharePoint 2013
 
+[![devDependency Status](https://david-dm.org/habaneroconsulting/sp2013-commandpalette/dev-status.svg)](https://david-dm.org/habaneroconsulting/sp2013-commandpalette#info=devDependencies) [![Build status](https://travis-ci.org/habaneroconsulting/sp2013-commandpalette.svg)](http://travis-ci.org/habaneroconsulting/sp2013-commandpalette)
+
+## Screenshot
+
 ![Command Palette Screenshot](http://i.imgur.com/FolLxHQ.png)
 
 ## Getting Started
