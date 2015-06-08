@@ -1,6 +1,5 @@
-/*!
- *  command-constants.js
- */
+/*! command-constants.js */
+
 var CP = CP || {};
 CP.Constants = CP.Constants || {};
 

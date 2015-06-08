@@ -1,10 +1,10 @@
-/*!
- *  commands/misc.js
- */
+/*! commands/misc.js */
+
 var CP = CP || {};
+CP.CommandList = CP.CommandList || [];
 
 (function (constants, util) {
-	CP.CommandList = CP.CommandList || [];
+	'use strict';
 
 	CP.CommandList = CP.CommandList.concat([
 		{

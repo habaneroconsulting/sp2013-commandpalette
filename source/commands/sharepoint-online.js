@@ -1,14 +1,14 @@
-/*!
- *  commands/sharepoint-online.js
- */
+/*! commands/sharepoint-online.js */
+
 var CP = CP || {};
+CP.CommandList = CP.CommandList || [];
 
 (function (constants, util) {
+	'use strict';
+
 	var siteType = constants.SiteTypes,
 		strings = constants.Strings,
 		versionType = constants.VersionTypes;
-
-	CP.CommandList = CP.CommandList || [];
 
 	CP.CommandList = CP.CommandList.concat([
 		{

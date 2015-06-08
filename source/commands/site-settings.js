@@ -1,13 +1,13 @@
-/*!
- *  commands/site-settings.js
- */
+/*! commands/site-settings.js */
+
 var CP = CP || {};
+CP.CommandList = CP.CommandList || [];
 
 (function (constants, util) {
+	'use strict';
+
 	var strings = constants.Strings,
 		siteType = constants.SiteTypes;
-
-	CP.CommandList = CP.CommandList || [];
 
 	CP.CommandList = CP.CommandList.concat([
 		{

@@ -1,16 +1,17 @@
-/*!
- *  command-util.js
- */
+/*! command-util.js */
+
 var CP = CP || {};
 CP.Util = CP.Util || {};
 
-(function (module) {
+(function (module, constants, window) {
+	'use strict';
+
 	// Open in a new window
 	module.openInNewWindow = false;
 
 	// Get the web server relative URL
 	module.getWebServerRelativeUrl = function () {
-		return (_spPageContextInfo.webServerRelativeUrl === '/') ? _spPageContextInfo.webServerRelativeUrl : _spPageContextInfo.webServerRelativeUrl + '/';
+		return (window._spPageContextInfo.webServerRelativeUrl === '/') ? window._spPageContextInfo.webServerRelativeUrl : window._spPageContextInfo.webServerRelativeUrl + '/';
 	};
 
 	// Open a URL in a new tab or in the current tab
@@ -24,7 +25,7 @@ CP.Util = CP.Util || {};
 
 	// Go to a specific page, with the relative server URL
 	module.goToPage = function (relativePath) {
-		module.goTo(window.location.origin + _spPageContextInfo.webServerRelativeUrl + relativePath);
+		module.goTo(window.location.origin + window._spPageContextInfo.webServerRelativeUrl + relativePath);
 	};
 
 	// Go to a central administration page
@@ -44,10 +45,11 @@ CP.Util = CP.Util || {};
 
 	// Returns the site type based on a site template ID
 	module.getSiteType = function () {
-		var siteType = CP.Constants.SiteTypes;
+		var siteType = constants.SiteTypes,
+			templateId = window.g_wsaSiteTemplateId;
 
-		if (typeof g_wsaSiteTemplateId !== 'undefined' && g_wsaSiteTemplateId) {
-			switch (g_wsaSiteTemplateId) {
+		if (typeof templateId !== 'undefined' && templateId) {
+			switch (templateId) {
 				case 'STS#0':
 				case 'SPSPERS#6':
 				case 'SPSMSITEHOST#0': {
@@ -60,7 +62,7 @@ CP.Util = CP.Util || {};
 				}
 			}
 
-			if (g_wsaSiteTemplateId.indexOf('INTERNET') > -1) {
+			if (templateId.indexOf('INTERNET') > -1) {
 				return siteType.pub;
 			}
 		}
@@ -70,15 +72,14 @@ CP.Util = CP.Util || {};
 
 	// Returns the SharePoint version type
 	module.getVersionType = function () {
-		var versionType = CP.Constants.VersionTypes;
+		var versionType = constants.VersionTypes;
 
 		if (typeof _spPageContextInfo !== 'undefined' &&
-			_spPageContextInfo.siteClientTag &&
-			_spPageContextInfo.siteClientTag.indexOf('$$16') > -1) {
+			window._spPageContextInfo.siteClientTag &&
+			window._spPageContextInfo.siteClientTag.indexOf('$$16') > -1) {
 			return versionType.online;
 		}
 
 		return versionType.premise;
 	};
-
-})(CP.Util);
+})(CP.Util, CP.Constants, window);

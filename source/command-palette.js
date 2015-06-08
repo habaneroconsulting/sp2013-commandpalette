@@ -1,9 +1,8 @@
-/*!
- *  command-palette.js
- */
+/*! command-palette.js */
+
 var CP = CP || {};
 
-(function (util) {
+(function (util, rivets, Mousetrap) {
 	'use strict';
 
 	var constants = {
@@ -20,119 +19,119 @@ var CP = CP || {};
 	 * CommandPaletteModel for binding
 	 */
 	function CommandPaletteModel () {
-		var palette = this;
+		var _this = this;
 
-		palette.list = getCommandList();
+		_this.list = getCommandList();
 
-		palette.command  = '';
-		palette.filteredList = palette.list;
-		palette.isEmpty = false;
-		palette.selected = 0;
+		_this.command  = '';
+		_this.filteredList = _this.list;
+		_this.isEmpty = false;
+		_this.selected = 0;
 
 		// Filter commands based on the typed keyword
-		palette.filteredCommands = function () {
-			var filter = palette.command;
+		_this.filteredCommands = function () {
+			var filter = _this.command;
 
 			// If there is no word, show all commands
 			if (!filter) {
-				palette.isEmpty = false;
+				_this.isEmpty = false;
 
-				palette.filteredList = palette.list;
+				_this.filteredList = _this.list;
 			} else {
 				// Filter the results
-				palette.filteredList = palette.list.filter(function (item) {
+				_this.filteredList = _this.list.filter(function (item) {
 					return item.command.toLowerCase().indexOf(filter.toLowerCase()) > -1;
 				});
 
-				if (palette.filteredList.length === 0) {
-					palette.isEmpty = true;
+				if (_this.filteredList.length === 0) {
+					_this.isEmpty = true;
 				} else {
-					palette.isEmpty = false;
+					_this.isEmpty = false;
 				}
 			}
 
 			// Reset selected state
-			palette.set(0);
+			_this.set(0);
 
-			return palette.filteredList;
+			return _this.filteredList;
 		};
 
 		// Set the command to a specific index
-		palette.set = function (index) {
+		_this.set = function (index) {
 			// Reset selected states
-			palette.list.map(function (element) {
+			_this.list.map(function (element) {
 				element.selected = false;
 			});
 
 			// Keep track of index
-			palette.selected = index;
+			_this.selected = index;
 
 			// Select command for model
-			if (palette.filteredList.length > 0) {
-				palette.filteredList[index].selected = true;
+			if (_this.filteredList.length > 0) {
+				_this.filteredList[index].selected = true;
 			}
 
 			elements.commandList.scrollTop = (index - constants.indexOfMiddleCommand) * constants.commandHeight;
 		};
 
-		palette.move = function (index) {
-			palette.set(palette.selected + index);
+		_this.move = function (index) {
+			_this.set(_this.selected + index);
 		};
 
 		// Move down on the list
-		palette.moveDown = function () {
+		_this.moveDown = function () {
 			// If the user is already on the bottom most command, go back to the top
-			if (palette.selected === palette.filteredList.length - 1) {
-				palette.set(0);
+			if (_this.selected === _this.filteredList.length - 1) {
+				_this.set(0);
 			} else {
-				palette.move(1);
+				_this.move(1);
 			}
 		};
 
 		// Move up on the list
-		palette.moveUp = function () {
+		_this.moveUp = function () {
 			// If the user is on the top most command, go to the bottom
-			if (palette.selected === 0) {
-				palette.set(palette.filteredList.length - 1);
+			if (_this.selected === 0) {
+				_this.set(_this.filteredList.length - 1);
 			} else {
-				palette.move(-1);
+				_this.move(-1);
 			}
 		};
 
 		// Move down on the list
-		palette.movePageDown = function () {
+		_this.movePageDown = function () {
 			// If the user is already on the bottom most command, go back to the top
-			if (palette.selected === palette.filteredList.length - 1) {
-				palette.set(0);
-			} else if (palette.selected > palette.filteredList.length - constants.pageHeight) {
-				palette.set(palette.filteredList.length - 1);
+			if (_this.selected === _this.filteredList.length - 1) {
+				_this.set(0);
+			} else if (_this.selected > _this.filteredList.length - constants.pageHeight) {
+				_this.set(_this.filteredList.length - 1);
 			} else {
-				palette.move(constants.pageHeight);
+				_this.move(constants.pageHeight);
 			}
 		};
 
 		// Move up on the list
-		palette.movePageUp = function () {
+		_this.movePageUp = function () {
 			// If the user is on the top most command, go to the bottom
-			if (palette.selected === 0) {
-				palette.set(palette.filteredList.length - 1);
-			} else if (palette.selected < constants.pageHeight) {
-				palette.set(0);
+			if (_this.selected === 0) {
+				_this.set(_this.filteredList.length - 1);
+			} else if (_this.selected < constants.pageHeight) {
+				_this.set(0);
 			} else {
-				palette.move(-constants.pageHeight);
+				_this.move(-constants.pageHeight);
 			}
 		};
 
-		palette.reset = function () {
+		_this.reset = function () {
 			// Reset the palette to the first option and remove the input value
-			palette.set(0);
-			palette.filteredList = palette.list;
-			palette.command = '';
-			palette.isEmpty = false;
+			_this.set(0);
+			_this.filteredList = _this.list;
+			_this.command = '';
+			_this.isEmpty = false;
 		};
 
 		// Run the command
-		palette.runFunction = function () {
+		_this.runFunction = function () {
 			// If argument[1] is a event object from clicking on a command
 			if (arguments[1] && arguments[1].fn) {
 				// Try to run the command that was sent through
@@ -144,7 +143,7 @@ var CP = CP || {};
 			} else {
 				// Otherwise, it is from an enter press, run the selected command
 				try {
-					palette.filteredList[palette.selected].fn();
+					_this.filteredList[_this.selected].fn();
 				} finally {
 					hideInput();
 				}
@@ -394,4 +393,4 @@ var CP = CP || {};
 
 		showInput();
 	});
-})(CP.Util);
+})(CP.Util, window.rivets, window.Mousetrap);

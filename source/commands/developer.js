@@ -1,20 +1,20 @@
-/*!
- *  commands/developer.js
- */
+/*! commands/developer.js */
+
 var CP = CP || {};
+CP.CommandList = CP.CommandList || [];
 
 (function (constants, util) {
-	CP.CommandList = CP.CommandList || [];
+	'use strict';
 
 	CP.CommandList = CP.CommandList.concat([
 		{
 			command: 'Log in as a different user',
 			fn: function () {
 				function forceNewLogin () {
-					window.location.href = CP.Util.getWebServerRelativeUrl() + '_layouts/closeConnection.aspx?loginasanotheruser=true';
+					window.location.href = util.getWebServerRelativeUrl() + '_layouts/closeConnection.aspx?loginasanotheruser=true';
 				}
 
-				if (_spPageContextInfo) {
+				if (window._spPageContextInfo) {
 					forceNewLogin();
 				}
 			}
@@ -23,8 +23,6 @@ var CP = CP || {};
 			command: 'Developer Tool: CBS to Diagnostic',
 			fn: function () {
 				(function () {
-					'use strict';
-
 					var options = {
 						template: '/_catalogs/masterpage/Display Templates/Content Web Parts/Item_Diagnostic.js',
 						templateName: 'Item_Diagnostic'
@@ -58,12 +56,9 @@ var CP = CP || {};
 				Hcf.PropertyBagBookmarklet = Hcf.PropertyBagBookmarklet || {};
 
 				(function (module, window, document, undefined) {
-					'use strict';
-
 					var ctx,
 						web, // SP context for CSOM, web object
 						props;
-
 
 					/**
 					 * Constructor
@@ -171,8 +166,6 @@ var CP = CP || {};
 				Hcf.RestEndpointsBookmarklet = Hcf.RestEndpointsBookmarklet || {};
 
 				(function (module, window, document, undefined) {
-					'use strict';
-
 					var relativeToSiteCollectionInput,
 						relativeToSiteCollection = false;
 
@@ -272,7 +265,6 @@ var CP = CP || {};
 
 						return false;
 					};
-
 
 					/**
 					 * Configuration

@@ -1,12 +1,12 @@
-/*!
- *  commands/central-admin.js
- */
+/*! commands/central-admin.js */
+
 var CP = CP || {};
+CP.CommandList = CP.CommandList || [];
 
 (function (constants, util) {
-	var versionType = constants.VersionTypes;
+	'use strict';
 
-	CP.CommandList = CP.CommandList || [];
+	var versionType = constants.VersionTypes;
 
 	CP.CommandList = CP.CommandList.concat([
 		{
@@ -249,4 +249,4 @@ var CP = CP || {};
 		}
 	]);
 
-})(CP.Constants, CP.CommandList, CP.Util);
+})(CP.Constants, CP.Util);
